@@ -23,6 +23,26 @@
         “My grace is sufficient for you, for My power is made perfect in weakness.”<br />
         <cite>— 2 Corinthians 12:9</cite>
       </blockquote>
+
+      <div class="support" data-support>
+        <button class="support__button" type="button" aria-expanded="false" aria-controls="support-options">
+          Support This Ministry
+        </button>
+        <div class="support__options" id="support-options" hidden>
+          <p class="support__subtitle">Choose your preferred platform:</p>
+          <ul class="support__list">
+            <li>
+              <a href="https://cash.app/$PowerInChrist" target="_blank" rel="noopener">CashApp: $PowerInChrist</a>
+            </li>
+            <li>
+              <a href="https://venmo.com/u/PowerInChrist" target="_blank" rel="noopener">Venmo: @PowerInChrist</a>
+            </li>
+            <li>
+              <a href="https://www.paypal.com/paypalme/PowerInChrist" target="_blank" rel="noopener">PayPal.me/PowerInChrist</a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -131,6 +151,46 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    const support = document.querySelector('[data-support]');
+    if (support) {
+      const button = support.querySelector('.support__button');
+      const options = support.querySelector('.support__options');
+
+      const openOptions = () => {
+        support.classList.add('support--open');
+        options.hidden = false;
+        button.setAttribute('aria-expanded', 'true');
+      };
+
+      const closeOptions = () => {
+        support.classList.remove('support--open');
+        options.hidden = true;
+        button.setAttribute('aria-expanded', 'false');
+      };
+
+      button.addEventListener('click', (event) => {
+        event.stopPropagation();
+        if (support.classList.contains('support--open')) {
+          closeOptions();
+        } else {
+          openOptions();
+        }
+      });
+
+      support.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          closeOptions();
+          button.focus();
+        }
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!support.contains(event.target)) {
+          closeOptions();
+        }
+      });
+    }
   </script>
 </body>
 </html>
