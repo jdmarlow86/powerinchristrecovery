@@ -25,22 +25,32 @@
       </blockquote>
 
       <div class="support" data-support>
-        <button class="support__button" type="button" aria-expanded="false" aria-controls="support-options">
+        <button
+          class="support__button"
+          type="button"
+          aria-haspopup="dialog"
+          aria-expanded="false"
+          aria-controls="support-modal"
+        >
           Support This Ministry
         </button>
-        <div class="support__options" id="support-options" hidden>
-          <p class="support__subtitle">Choose your preferred platform:</p>
-          <ul class="support__list">
-            <li>
-              <a href="https://cash.app/$PowerInChrist" target="_blank" rel="noopener">CashApp: $PowerInChrist</a>
-            </li>
-            <li>
-              <a href="https://venmo.com/u/PowerInChrist" target="_blank" rel="noopener">Venmo: @PowerInChrist</a>
-            </li>
-            <li>
-              <a href="https://www.paypal.com/paypalme/PowerInChrist" target="_blank" rel="noopener">PayPal.me/PowerInChrist</a>
-            </li>
-          </ul>
+        <div class="support__modal" id="support-modal" role="dialog" aria-modal="true" aria-labelledby="support-modal-title" hidden>
+          <div class="support__modal-content">
+            <button class="support__close" type="button" aria-label="Close support options">&times;</button>
+            <h2 class="support__title" id="support-modal-title">Support This Ministry</h2>
+            <p class="support__subtitle">Choose your preferred platform:</p>
+            <ul class="support__list">
+              <li>
+                <a href="https://cash.app/$PowerInChrist" target="_blank" rel="noopener">CashApp: $PowerInChrist</a>
+              </li>
+              <li>
+                <a href="https://venmo.com/u/PowerInChrist" target="_blank" rel="noopener">Venmo: @PowerInChrist</a>
+              </li>
+              <li>
+                <a href="https://www.paypal.com/paypalme/PowerInChrist" target="_blank" rel="noopener">PayPal.me/PowerInChrist</a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -155,39 +165,49 @@
     const support = document.querySelector('[data-support]');
     if (support) {
       const button = support.querySelector('.support__button');
-      const options = support.querySelector('.support__options');
+      const modal = support.querySelector('.support__modal');
+      const closeButton = support.querySelector('.support__close');
+      const firstLink = support.querySelector('.support__list a');
 
-      const openOptions = () => {
+      const openModal = () => {
         support.classList.add('support--open');
-        options.hidden = false;
+        modal.hidden = false;
+        document.body.classList.add('modal-open');
         button.setAttribute('aria-expanded', 'true');
+        window.requestAnimationFrame(() => {
+          (firstLink || closeButton || button).focus();
+        });
       };
 
-      const closeOptions = () => {
+      const closeModal = () => {
         support.classList.remove('support--open');
-        options.hidden = true;
+        modal.hidden = true;
+        document.body.classList.remove('modal-open');
         button.setAttribute('aria-expanded', 'false');
+        button.focus();
       };
 
-      button.addEventListener('click', (event) => {
-        event.stopPropagation();
+      button.addEventListener('click', () => {
         if (support.classList.contains('support--open')) {
-          closeOptions();
+          closeModal();
         } else {
-          openOptions();
+          openModal();
         }
       });
 
-      support.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-          closeOptions();
-          button.focus();
+      if (closeButton) {
+        closeButton.addEventListener('click', closeModal);
+      }
+
+      modal.addEventListener('click', (event) => {
+        if (event.target === modal) {
+          closeModal();
         }
       });
 
-      document.addEventListener('click', (event) => {
-        if (!support.contains(event.target)) {
-          closeOptions();
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && support.classList.contains('support--open')) {
+          closeModal();
         }
       });
     }
