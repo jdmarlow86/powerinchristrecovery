@@ -91,10 +91,6 @@ img {
   font-size: 0.85rem;
 }
 
-body.modal-open {
-  overflow: hidden;
-}
-
 .support {
   position: relative;
   margin: 0 auto;
@@ -128,22 +124,20 @@ body.modal-open {
   outline-offset: 4px;
 }
 
-.support__modal[hidden] {
+.support__content {
+  width: min(420px, 90vw);
+}
+
+.support__content[hidden] {
   display: none;
 }
 
-.support__modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(23, 32, 46, 0.65);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  z-index: 100;
+.support__content:not([hidden]) {
+  display: block;
+  animation: fadeIn 200ms ease-out;
 }
 
-.support__modal-content {
+.support__panel {
   background: var(--color-light);
   color: var(--color-text);
   border-radius: 1.25rem;
@@ -151,7 +145,6 @@ body.modal-open {
   box-shadow: 0 1.5rem 3rem -1.5rem rgba(35, 48, 67, 0.45);
   max-width: min(420px, 90vw);
   width: 100%;
-  position: relative;
   text-align: left;
 }
 
@@ -159,24 +152,6 @@ body.modal-open {
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 0.75rem;
-  color: var(--color-primary);
-}
-
-.support__close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: transparent;
-  border: none;
-  font-size: 1.75rem;
-  line-height: 1;
-  cursor: pointer;
-  color: var(--color-secondary);
-  transition: color 0.2s ease;
-}
-
-.support__close:hover,
-.support__close:focus {
   color: var(--color-primary);
 }
 
@@ -200,6 +175,44 @@ body.modal-open {
   gap: 0.5rem;
 }
 
+.support__note {
+  margin-top: 1.25rem;
+  font-size: 0.9rem;
+  color: rgba(35, 48, 67, 0.75);
+}
+
+.support__window {
+  background: var(--color-muted);
+  font-family: var(--font-base);
+  color: var(--color-text);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+}
+
+.support__window-main {
+  width: 100%;
+  max-width: 420px;
+}
+
+.support__content--static {
+  display: block;
+  margin-top: 1rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .support__list a::after {
   content: '↗';
   font-size: 0.85em;
@@ -209,11 +222,6 @@ body.modal-open {
 .support__list a:hover,
 .support__list a:focus {
   text-decoration: underline;
-}
-
-.support--open .support__button {
-  transform: translateY(-2px);
-  box-shadow: 0 1rem 2.25rem -1rem rgba(0, 0, 0, 0.5);
 }
 
 .section {
