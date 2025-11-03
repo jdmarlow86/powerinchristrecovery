@@ -169,6 +169,37 @@
         </div>
       </div>
     </section>
+
+    <section class="section newsletter" aria-labelledby="newsletter">
+      <div class="container newsletter__grid">
+        <div class="newsletter__content">
+          <h2 id="newsletter">Weekly Encouragement in Your Inbox</h2>
+          <p>
+            Subscribe to receive a short weekly update with prayer prompts, Scripture meditations, and ministry news to help
+            you stay rooted in Christ throughout the week.
+          </p>
+        </div>
+        <form class="newsletter__form" data-newsletter-form>
+          <label class="newsletter__label" for="newsletter-email">Email address</label>
+          <div class="newsletter__field">
+            <input
+              class="newsletter__input"
+              type="email"
+              id="newsletter-email"
+              name="email"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+            />
+            <button class="newsletter__button" type="submit">Sign Up</button>
+          </div>
+          <p class="newsletter__privacy">We'll send one email each week. Unsubscribe at any time.</p>
+          <p class="newsletter__confirmation" data-newsletter-message hidden role="status" aria-live="polite">
+            Thanks for subscribing! Please check your inbox for a confirmation message.
+          </p>
+        </form>
+      </div>
+    </section>
   </main>
 
   <footer class="footer">
@@ -250,6 +281,41 @@
           }
         });
       }
+    }
+
+    const newsletterForm = document.querySelector('[data-newsletter-form]');
+    if (newsletterForm) {
+      const emailInput = newsletterForm.querySelector('input[type="email"]');
+      const message = newsletterForm.querySelector('[data-newsletter-message]');
+      const submitButton = newsletterForm.querySelector('button[type="submit"]');
+
+      newsletterForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        if (emailInput && !emailInput.checkValidity()) {
+          emailInput.reportValidity();
+          return;
+        }
+
+        if (submitButton) {
+          submitButton.disabled = true;
+        }
+
+        newsletterForm.reset();
+
+        if (message) {
+          message.hidden = false;
+        }
+
+        window.setTimeout(() => {
+          if (submitButton) {
+            submitButton.disabled = false;
+          }
+          if (message) {
+            message.hidden = true;
+          }
+        }, 5000);
+      });
     }
   </script>
 </body>

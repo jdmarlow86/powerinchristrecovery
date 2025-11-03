@@ -334,6 +334,99 @@ img {
   text-decoration: underline;
 }
 
+.newsletter {
+  background: var(--color-light);
+}
+
+.newsletter__grid {
+  display: grid;
+  gap: clamp(2rem, 4vw, 3rem);
+  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.newsletter__content h2 {
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+
+.newsletter__content p {
+  font-size: 1.05rem;
+  color: rgba(35, 48, 67, 0.85);
+}
+
+.newsletter__form {
+  background: var(--color-muted);
+  padding: clamp(1.75rem, 4vw, 2.5rem);
+  border-radius: 1.25rem;
+  box-shadow: 0 1.5rem 3rem -1.75rem rgba(35, 48, 67, 0.55);
+  display: grid;
+  gap: 1rem;
+}
+
+.newsletter__label {
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.newsletter__field {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.newsletter__input {
+  flex: 1 1 220px;
+  border: 1px solid rgba(35, 48, 67, 0.25);
+  border-radius: 999px;
+  padding: 0.85rem 1.25rem;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.newsletter__input:focus {
+  outline: none;
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0 3px rgba(106, 140, 175, 0.2);
+}
+
+.newsletter__button {
+  background: var(--color-primary);
+  color: var(--color-light);
+  font-weight: 700;
+  border: none;
+  border-radius: 999px;
+  padding: 0.85rem 1.75rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.newsletter__button:hover,
+.newsletter__button:focus {
+  background: var(--color-secondary);
+  transform: translateY(-1px);
+  box-shadow: 0 1rem 2rem -1.5rem rgba(35, 48, 67, 0.45);
+}
+
+.newsletter__button:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.newsletter__privacy {
+  font-size: 0.9rem;
+  color: rgba(35, 48, 67, 0.7);
+}
+
+.newsletter__confirmation {
+  font-weight: 600;
+  color: var(--color-primary);
+  background: rgba(106, 140, 175, 0.12);
+  padding: 0.75rem 1rem;
+  border-radius: 0.85rem;
+}
+
 .footer {
   background-color: #1b2533;
   color: rgba(255, 255, 255, 0.8);
@@ -349,5 +442,13 @@ img {
 
   .steps-grid {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .newsletter__field {
+    flex-direction: column;
+  }
+
+  .newsletter__button {
+    width: 100%;
   }
 }
