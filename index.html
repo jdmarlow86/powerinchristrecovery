@@ -182,7 +182,7 @@
             you stay rooted in Christ throughout the week.
           </p>
         </div>
-        <form class="newsletter__form" data-newsletter-form>
+        <form class="newsletter__form" data-newsletter-form novalidate>
           <label class="newsletter__label" for="newsletter-email">Email address</label>
           <div class="newsletter__field">
             <input
@@ -198,7 +198,10 @@
           </div>
           <p class="newsletter__privacy">We'll send one email each week. Unsubscribe at any time.</p>
           <p class="newsletter__confirmation" data-newsletter-message hidden role="status" aria-live="polite">
-            Thanks for subscribing! Please check your inbox for a confirmation message.
+            Thanks for subscribing! Please check your inbox for a welcome message.
+          </p>
+          <p class="newsletter__error" data-newsletter-error hidden role="status" aria-live="assertive">
+            Sorry, we couldn't send your welcome email. Please try again in a moment.
           </p>
         </form>
       </div>
@@ -290,9 +293,59 @@
     if (newsletterForm) {
       const emailInput = newsletterForm.querySelector('input[type="email"]');
       const message = newsletterForm.querySelector('[data-newsletter-message]');
+      const errorMessage = newsletterForm.querySelector('[data-newsletter-error]');
       const submitButton = newsletterForm.querySelector('button[type="submit"]');
+      const submitButtonLabel = submitButton ? submitButton.textContent : '';
 
-      newsletterForm.addEventListener('submit', (event) => {
+      const toggleMessage = (element, shouldShow) => {
+        if (!element) return;
+        element.hidden = !shouldShow;
+      };
+
+      const sendWelcomeEmail = async (emailAddress) => {
+        const endpointBase = 'https://formsubmit.co/ajax/';
+        const welcomeLines = [
+          'Hi there,',
+          '',
+          'Thank you for signing up to receive weekly encouragement from Power in Christ Recovery.',
+          'We are honored to walk alongside you in prayer, Scripture reflection, and Christ-centered support.',
+          '',
+          'Each week you can expect:',
+          '• A short devotional focus rooted in God\'s Word.',
+          '• A prayer prompt to carry with you through the week.',
+          '• Ministry updates and opportunities to stay connected.',
+          '',
+          'We are praying for you. May the peace of Christ guard your heart as you continue this journey toward freedom.',
+          '',
+          'Grace and peace,',
+          'Power in Christ Recovery'
+        ];
+
+        const payload = {
+          email: emailAddress,
+          message: welcomeLines.join('\n'),
+          _subject: 'Welcome to Power in Christ Recovery',
+          _bcc: 'jonmarlow@gmail.com',
+          _template: 'table'
+        };
+
+        const response = await fetch(`${endpointBase}${encodeURIComponent(emailAddress)}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to send welcome email');
+        }
+
+        return response.json();
+      };
+
+      newsletterForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
         if (emailInput && !emailInput.checkValidity()) {
@@ -300,24 +353,40 @@
           return;
         }
 
+        const emailAddress = emailInput ? emailInput.value.trim() : '';
+        if (!emailAddress) {
+          return;
+        }
+
+        toggleMessage(message, false);
+        toggleMessage(errorMessage, false);
+
         if (submitButton) {
           submitButton.disabled = true;
+          submitButton.textContent = 'Sending…';
         }
 
-        newsletterForm.reset();
-
-        if (message) {
-          message.hidden = false;
-        }
-
-        window.setTimeout(() => {
+        try {
+          await sendWelcomeEmail(emailAddress);
+          newsletterForm.reset();
+          toggleMessage(message, true);
+        } catch (error) {
+          console.error('Newsletter signup error:', error);
+          toggleMessage(errorMessage, true);
+          if (emailInput) {
+            emailInput.focus();
+          }
+        } finally {
           if (submitButton) {
             submitButton.disabled = false;
+            submitButton.textContent = submitButtonLabel;
           }
-          if (message) {
-            message.hidden = true;
-          }
-        }, 5000);
+
+          window.setTimeout(() => {
+            toggleMessage(message, false);
+            toggleMessage(errorMessage, false);
+          }, 8000);
+        }
       });
     }
   </script>
