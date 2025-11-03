@@ -365,6 +365,11 @@ img {
   gap: 1rem;
 }
 
+.newsletter__intro {
+  font-size: 1rem;
+  color: rgba(35, 48, 67, 0.85);
+}
+
 .newsletter__label {
   font-weight: 600;
   color: var(--color-primary);
