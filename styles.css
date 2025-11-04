@@ -318,6 +318,68 @@ img {
   border-left: 6px solid var(--color-highlight);
 }
 
+.section--chapter {
+  background: var(--color-muted);
+}
+
+.chapter {
+  display: grid;
+  gap: clamp(2rem, 5vw, 3rem);
+}
+
+.chapter__grid {
+  display: grid;
+  gap: clamp(2rem, 4vw, 3rem);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  align-items: start;
+}
+
+.chapter__content {
+  background: var(--color-light);
+  padding: clamp(1.75rem, 4vw, 2.5rem);
+  border-radius: 1.25rem;
+  box-shadow: 0 1.5rem 3rem -1.75rem rgba(35, 48, 67, 0.45);
+  border: 1px solid rgba(35, 48, 67, 0.08);
+  display: grid;
+  gap: 1.5rem;
+}
+
+.chapter__list {
+  display: grid;
+  gap: 1rem;
+  padding-left: 1.25rem;
+}
+
+.chapter__list li {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.chapter__card {
+  background: var(--color-primary);
+  color: var(--color-light);
+  padding: clamp(1.75rem, 4vw, 2.5rem);
+  border-radius: 1.25rem;
+  box-shadow: 0 1.75rem 3.25rem -1.75rem rgba(35, 48, 67, 0.6);
+  display: grid;
+  gap: 1.25rem;
+}
+
+.chapter__card a {
+  color: var(--color-highlight);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.chapter__card a:hover,
+.chapter__card a:focus {
+  text-decoration: underline;
+}
+
+.chapter__contact {
+  font-size: 1.05rem;
+}
+
 .section--accent .list--plain li {
   font-size: 1.05rem;
   line-height: 1.8;
