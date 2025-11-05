@@ -25,19 +25,46 @@
       </blockquote>
 
       <div class="support" data-support>
-        <div class="support__content" data-support-content>
+        <button
+          class="support__button"
+          type="button"
+          aria-haspopup="dialog"
+          aria-expanded="false"
+          aria-controls="support-modal"
+        >
+          Support This Ministry
+        </button>
+        <div
+          class="support__content"
+          data-support-content
+          id="support-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="support-modal-title"
+          hidden
+        >
           <div class="support__panel">
             <h2 class="support__title" id="support-modal-title">Support This Ministry</h2>
             <p class="support__subtitle">Choose your preferred platform:</p>
             <ul class="support__list">
               <li>
-                <a class="support__link support__link--cashapp" href="https://cash.app/$jdmarlow" target="_blank" rel="noopener"
-                  >CashApp: $jdmarlow</a
+                <a
+                  class="support__link support__link--cashapp"
+                  href="https://cash.app/$jdmarlow"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Support via Cash App: $jdmarlow"
+                  >Cash App</a
                 >
               </li>
               <li>
-                <a class="support__link support__link--venmo" href="https://venmo.com/u/Jonathan-Marlow-19" target="_blank" rel="noopener"
-                  >Venmo: @Jonathan-Marlow-19</a
+                <a
+                  class="support__link support__link--venmo"
+                  href="https://venmo.com/u/Jonathan-Marlow-19"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Support via Venmo: @Jonathan-Marlow-19"
+                  >Venmo</a
                 >
               </li>
               <li>
@@ -46,7 +73,8 @@
                   href="https://www.paypal.com/paypalme/jdmarlow86"
                   target="_blank"
                   rel="noopener"
-                  >PayPal: @jdmarlow86</a
+                  aria-label="Support via PayPal: @jdmarlow86"
+                  >PayPal</a
                 >
               </li>
             </ul>
@@ -62,13 +90,23 @@
               <p class="support__subtitle">Choose your preferred platform:</p>
               <ul class="support__list">
                 <li>
-                  <a class="support__link support__link--cashapp" href="https://cash.app/$jdmarlow" target="_blank" rel="noopener"
-                    >CashApp: $jdmarlow</a
+                  <a
+                    class="support__link support__link--cashapp"
+                    href="https://cash.app/$jdmarlow"
+                    target="_blank"
+                    rel="noopener"
+                    aria-label="Support via Cash App: $jdmarlow"
+                    >Cash App</a
                   >
                 </li>
                 <li>
-                  <a class="support__link support__link--venmo" href="https://venmo.com/u/Jonathan-Marlow-19" target="_blank" rel="noopener"
-                    >Venmo: @Jonathan-Marlow-19</a
+                  <a
+                    class="support__link support__link--venmo"
+                    href="https://venmo.com/u/Jonathan-Marlow-19"
+                    target="_blank"
+                    rel="noopener"
+                    aria-label="Support via Venmo: @Jonathan-Marlow-19"
+                    >Venmo</a
                   >
                 </li>
                 <li>
@@ -77,7 +115,8 @@
                     href="https://www.paypal.com/paypalme/jdmarlow86"
                     target="_blank"
                     rel="noopener"
-                    >PayPal: @jdmarlow86</a
+                    aria-label="Support via PayPal: @jdmarlow86"
+                    >PayPal</a
                   >
                 </li>
               </ul>
