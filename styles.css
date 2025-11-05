@@ -166,13 +166,43 @@ img {
   gap: 0.75rem;
 }
 
-.support__list a {
-  color: var(--color-primary);
-  font-weight: 600;
-  text-decoration: none;
+.support__link {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 0.85rem 1.25rem;
+  border-radius: 0.85rem;
+  color: var(--color-light);
+  background: linear-gradient(135deg, rgba(42, 76, 115, 0.9), rgba(35, 48, 67, 0.95));
+  box-shadow: 0 1.1rem 2.2rem -1.3rem rgba(35, 48, 67, 0.7);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.support__link:hover,
+.support__link:focus {
+  transform: translateY(-1px);
+  box-shadow: 0 1.35rem 2.35rem -1.2rem rgba(35, 48, 67, 0.8);
+  filter: brightness(1.05);
+}
+
+.support__link:focus-visible {
+  outline: 3px solid rgba(217, 164, 65, 0.9);
+  outline-offset: 3px;
+}
+
+.support__link--cashapp {
+  background: linear-gradient(135deg, #19c463, #0f9b4a);
+}
+
+.support__link--venmo {
+  background: linear-gradient(135deg, #3d95ce, #2a6fa0);
+}
+
+.support__link--paypal {
+  background: linear-gradient(135deg, #1e3a78, #0b1f43);
 }
 
 .support__note {
