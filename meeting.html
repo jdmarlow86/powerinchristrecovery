@@ -67,100 +67,183 @@
       </div>
     </aside>
 
-    <section class="meeting-stage" aria-labelledby="meeting-stage-title">
-      <header class="meeting-stage__header">
-        <div>
-          <p class="meeting-stage__status">Live • Weekly Recovery Gathering</p>
-          <h2 id="meeting-stage-title">Prayer &amp; Encouragement Circle</h2>
+    <div class="meeting-stage-group">
+      <section class="meeting-stage" aria-labelledby="meeting-stage-title" data-meeting-stage>
+        <header class="meeting-stage__header">
+          <div class="meeting-stage__summary">
+            <p class="meeting-stage__status" data-meeting-status>Weekly Recovery Gathering</p>
+            <h2 id="meeting-stage-title" data-meeting-title>Prayer &amp; Encouragement Circle</h2>
+            <p class="meeting-stage__time" data-meeting-time>Tuesdays • 8:00 PM Eastern (ET)</p>
+            <p class="meeting-stage__countdown" data-meeting-countdown>Next session details will appear here.</p>
+            <div class="meeting-stage__meta" data-meeting-meta>
+              <span class="meeting-stage__meta-item">75 minutes</span>
+              <span class="meeting-stage__meta-item">Online Voice Room</span>
+              <span class="meeting-stage__meta-item">Hosted by Jonathan Marlow &amp; Grace Torres</span>
+            </div>
+          </div>
+          <div class="meeting-stage__actions">
+            <a
+              class="meeting-stage__join"
+              href="https://meet.jit.si/PowerInChristPrayerCircle"
+              target="_blank"
+              rel="noopener"
+              data-meeting-join
+              >Join Voice Room</a
+            >
+            <button class="meeting-stage__calendar" type="button" data-meeting-calendar hidden>Add to Calendar</button>
+            <button class="meeting-stage__copy" type="button" data-meeting-copy hidden>Copy Join Link</button>
+          </div>
+        </header>
+
+        <div class="meeting-stage__body">
+          <section class="meeting-voices" aria-label="Active speakers">
+            <h3 class="meeting-section-title">Currently Speaking</h3>
+            <div class="meeting-voices__grid" data-active-speakers>
+              <article class="meeting-avatar meeting-avatar--speaking" aria-label="Jonathan Marlow is sharing">
+                <div class="meeting-avatar__initials" aria-hidden="true">JM</div>
+                <p class="meeting-avatar__name">Jonathan Marlow</p>
+                <p class="meeting-avatar__role">Ministry Director</p>
+              </article>
+              <article class="meeting-avatar meeting-avatar--speaking" aria-label="Grace Torres is sharing">
+                <div class="meeting-avatar__initials" aria-hidden="true">GT</div>
+                <p class="meeting-avatar__name">Grace Torres</p>
+                <p class="meeting-avatar__role">Prayer Captain</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="meeting-voices" aria-label="Listeners">
+            <h3 class="meeting-section-title">Listeners</h3>
+            <div class="meeting-voices__grid meeting-voices__grid--compact" data-active-listeners>
+              <article class="meeting-avatar" aria-label="Anthony Reid listening">
+                <div class="meeting-avatar__initials" aria-hidden="true">AR</div>
+                <p class="meeting-avatar__name">Anthony Reid</p>
+              </article>
+              <article class="meeting-avatar" aria-label="Bianca Lopez listening">
+                <div class="meeting-avatar__initials" aria-hidden="true">BL</div>
+                <p class="meeting-avatar__name">Bianca Lopez</p>
+              </article>
+              <article class="meeting-avatar" aria-label="Caleb Dorsey listening">
+                <div class="meeting-avatar__initials" aria-hidden="true">CD</div>
+                <p class="meeting-avatar__name">Caleb Dorsey</p>
+              </article>
+              <article class="meeting-avatar" aria-label="Daniella Knight listening">
+                <div class="meeting-avatar__initials" aria-hidden="true">DK</div>
+                <p class="meeting-avatar__name">Daniella Knight</p>
+              </article>
+              <article class="meeting-avatar" aria-label="Evelyn Carter listening">
+                <div class="meeting-avatar__initials" aria-hidden="true">EC</div>
+                <p class="meeting-avatar__name">Evelyn Carter</p>
+              </article>
+              <article class="meeting-avatar" aria-label="Felix Grant listening">
+                <div class="meeting-avatar__initials" aria-hidden="true">FG</div>
+                <p class="meeting-avatar__name">Felix Grant</p>
+              </article>
+              <article class="meeting-avatar" aria-label="Hannah Price listening">
+                <div class="meeting-avatar__initials" aria-hidden="true">HP</div>
+                <p class="meeting-avatar__name">Hannah Price</p>
+              </article>
+              <article class="meeting-avatar" aria-label="Isaac Romero listening">
+                <div class="meeting-avatar__initials" aria-hidden="true">IR</div>
+                <p class="meeting-avatar__name">Isaac Romero</p>
+              </article>
+            </div>
+          </section>
         </div>
-        <button class="meeting-stage__join" type="button">Join Voice</button>
-      </header>
 
-      <div class="meeting-stage__body">
-        <section class="meeting-voices" aria-label="Active speakers">
-          <h3 class="meeting-section-title">Currently Speaking</h3>
-          <div class="meeting-voices__grid">
-            <article class="meeting-avatar meeting-avatar--speaking" aria-label="Sister Joy is speaking">
-              <div class="meeting-avatar__initials" aria-hidden="true">SJ</div>
-              <p class="meeting-avatar__name">Sister Joy</p>
-              <p class="meeting-avatar__role">Facilitator</p>
-            </article>
-            <article class="meeting-avatar meeting-avatar--speaking" aria-label="Marcus P. is sharing">
-              <div class="meeting-avatar__initials" aria-hidden="true">MP</div>
-              <p class="meeting-avatar__name">Marcus P.</p>
-              <p class="meeting-avatar__role">Prayer Captain</p>
-            </article>
+        <footer class="meeting-controls" aria-label="Voice controls">
+          <button class="meeting-control" type="button" aria-pressed="false">
+            <span aria-hidden="true">🎤</span>
+            <span class="meeting-control__label">Mute</span>
+          </button>
+          <button class="meeting-control" type="button" aria-pressed="false">
+            <span aria-hidden="true">🎧</span>
+            <span class="meeting-control__label">Deafen</span>
+          </button>
+          <button class="meeting-control" type="button">
+            <span aria-hidden="true">📤</span>
+            <span class="meeting-control__label">Share</span>
+          </button>
+          <button class="meeting-control meeting-control--leave" type="button">
+            <span aria-hidden="true">🚪</span>
+            <span class="meeting-control__label">Leave</span>
+          </button>
+        </footer>
+      </section>
+
+      <section class="meeting-schedule" aria-labelledby="meeting-schedule-title">
+        <header class="meeting-schedule__header">
+          <div>
+            <h3 id="meeting-schedule-title" class="meeting-section-title">Upcoming Meetings</h3>
+            <p class="meeting-schedule__subtitle">Plan ahead for online and in-person gatherings led by our recovery mentors.</p>
           </div>
-        </section>
-
-        <section class="meeting-voices" aria-label="Listeners">
-          <h3 class="meeting-section-title">Listeners</h3>
-          <div class="meeting-voices__grid meeting-voices__grid--compact">
-            <article class="meeting-avatar" aria-label="Alex R. listening">
-              <div class="meeting-avatar__initials" aria-hidden="true">AR</div>
-              <p class="meeting-avatar__name">Alex R.</p>
-            </article>
-            <article class="meeting-avatar" aria-label="Bianca L. listening">
-              <div class="meeting-avatar__initials" aria-hidden="true">BL</div>
-              <p class="meeting-avatar__name">Bianca L.</p>
-            </article>
-            <article class="meeting-avatar" aria-label="Dorian M. listening">
-              <div class="meeting-avatar__initials" aria-hidden="true">DM</div>
-              <p class="meeting-avatar__name">Dorian M.</p>
-            </article>
-            <article class="meeting-avatar" aria-label="Grace K. listening">
-              <div class="meeting-avatar__initials" aria-hidden="true">GK</div>
-              <p class="meeting-avatar__name">Grace K.</p>
-            </article>
-            <article class="meeting-avatar" aria-label="Harold listening">
-              <div class="meeting-avatar__initials" aria-hidden="true">HB</div>
-              <p class="meeting-avatar__name">Harold B.</p>
-            </article>
-            <article class="meeting-avatar" aria-label="Iris listening">
-              <div class="meeting-avatar__initials" aria-hidden="true">IL</div>
-              <p class="meeting-avatar__name">Iris L.</p>
-            </article>
-            <article class="meeting-avatar" aria-label="James listening">
-              <div class="meeting-avatar__initials" aria-hidden="true">JM</div>
-              <p class="meeting-avatar__name">James M.</p>
-            </article>
-            <article class="meeting-avatar" aria-label="Kay listening">
-              <div class="meeting-avatar__initials" aria-hidden="true">KC</div>
-              <p class="meeting-avatar__name">Kay C.</p>
-            </article>
+          <div class="meeting-filters" role="group" aria-label="Filter meetings by format">
+            <button class="meeting-filters__button meeting-filters__button--active" type="button" data-filter="all">All</button>
+            <button class="meeting-filters__button" type="button" data-filter="online">Online</button>
+            <button class="meeting-filters__button" type="button" data-filter="in-person">In-Person</button>
           </div>
-        </section>
-      </div>
+        </header>
 
-      <footer class="meeting-controls" aria-label="Voice controls">
-        <button class="meeting-control" type="button" aria-pressed="false">
-          <span aria-hidden="true">🎤</span>
-          <span class="meeting-control__label">Mute</span>
-        </button>
-        <button class="meeting-control" type="button" aria-pressed="false">
-          <span aria-hidden="true">🎧</span>
-          <span class="meeting-control__label">Deafen</span>
-        </button>
-        <button class="meeting-control" type="button">
-          <span aria-hidden="true">📤</span>
-          <span class="meeting-control__label">Share</span>
-        </button>
-        <button class="meeting-control meeting-control--leave" type="button">
-          <span aria-hidden="true">🚪</span>
-          <span class="meeting-control__label">Leave</span>
-        </button>
-      </footer>
-    </section>
+        <ul class="meeting-schedule__list" data-schedule-list>
+          <li class="meeting-schedule__placeholder">Gathering schedule will load shortly. Enable JavaScript if you do not see the meetings.</li>
+        </ul>
+        <noscript>
+          <ul class="meeting-schedule__list">
+            <li class="meeting-schedule__item">
+              <div class="meeting-schedule__time">
+                <p class="meeting-schedule__day">Tuesdays</p>
+                <p class="meeting-schedule__local">8:00 PM Eastern (ET)</p>
+              </div>
+              <div class="meeting-schedule__details">
+                <h4 class="meeting-schedule__title">Prayer &amp; Encouragement Circle</h4>
+                <p class="meeting-schedule__description">
+                  Weekly voice gathering focused on Scripture, testimony, and live prayer support led by Jonathan Marlow and Grace Torres.
+                </p>
+                <p class="meeting-schedule__format">Online Voice Room • Join at https://meet.jit.si/PowerInChristPrayerCircle</p>
+              </div>
+            </li>
+            <li class="meeting-schedule__item">
+              <div class="meeting-schedule__time">
+                <p class="meeting-schedule__day">Thursdays</p>
+                <p class="meeting-schedule__local">7:30 PM Eastern (ET)</p>
+              </div>
+              <div class="meeting-schedule__details">
+                <h4 class="meeting-schedule__title">Men's Journey Group</h4>
+                <p class="meeting-schedule__description">
+                  Accountability and recovery coaching for men walking through the 10 Step plan with Marcus Peterson and Aaron Blake.
+                </p>
+                <p class="meeting-schedule__format">Online Video Room • Join at https://meet.jit.si/PowerInChristMensJourney</p>
+              </div>
+            </li>
+            <li class="meeting-schedule__item">
+              <div class="meeting-schedule__time">
+                <p class="meeting-schedule__day">Mondays</p>
+                <p class="meeting-schedule__local">7:00 PM Central (CT)</p>
+              </div>
+              <div class="meeting-schedule__details">
+                <h4 class="meeting-schedule__title">Women's Recovery Circle</h4>
+                <p class="meeting-schedule__description">
+                  In-person gathering at Grace Community Church (214 W Main St, Tulsa, OK) with testimony, prayer, and care teams.
+                </p>
+                <p class="meeting-schedule__format">In-Person • RSVP via mybiblebelt@gmail.com for childcare and resources</p>
+              </div>
+            </li>
+          </ul>
+        </noscript>
+      </section>
+
+      <div class="meeting-alert" data-meeting-alert role="status" aria-live="polite" hidden></div>
+    </div>
 
     <aside class="meeting-notes" aria-labelledby="meeting-notes-title">
       <h3 id="meeting-notes-title">Meeting Notes</h3>
       <div class="meeting-note-card">
         <h4>Scripture Focus</h4>
-        <p>"Cast all your anxiety on Him because He cares for you." — 1 Peter 5:7</p>
+        <p data-note-scripture>&ldquo;Cast all your anxiety on Him because He cares for you.&rdquo; — 1 Peter 5:7</p>
       </div>
       <div class="meeting-note-card">
         <h4>Prayer Prompts</h4>
-        <ul>
+        <ul data-note-prompts>
           <li>Ask the Spirit to fill our hearts with peace.</li>
           <li>Pray for those beginning their recovery journey.</li>
           <li>Lift up leaders serving across each chapter.</li>
@@ -168,7 +251,7 @@
       </div>
       <div class="meeting-note-card">
         <h4>Upcoming Gatherings</h4>
-        <p>Mentor breakout rooms open immediately after the call for personal prayer and accountability check-ins.</p>
+        <p data-note-upcoming>Mentor breakout rooms open immediately after the call for personal prayer and accountability check-ins.</p>
       </div>
     </aside>
   </main>
@@ -179,8 +262,564 @@
     </div>
   </footer>
 
+  <template id="meeting-avatar-template">
+    <article class="meeting-avatar">
+      <div class="meeting-avatar__initials" aria-hidden="true"></div>
+      <p class="meeting-avatar__name"></p>
+      <p class="meeting-avatar__role"></p>
+    </article>
+  </template>
+
+  <template id="meeting-schedule-item-template">
+    <li class="meeting-schedule__item">
+      <div class="meeting-schedule__time">
+        <p class="meeting-schedule__day" data-schedule-day></p>
+        <p class="meeting-schedule__local" data-schedule-local></p>
+      </div>
+      <div class="meeting-schedule__details">
+        <div class="meeting-schedule__heading">
+          <h4 class="meeting-schedule__title" data-schedule-title></h4>
+          <span class="meeting-schedule__live" data-schedule-live hidden>Live Now</span>
+        </div>
+        <p class="meeting-schedule__description" data-schedule-description></p>
+        <ul class="meeting-schedule__tags" data-schedule-tags></ul>
+        <dl class="meeting-schedule__meta">
+          <div class="meeting-schedule__meta-item">
+            <dt class="meeting-schedule__meta-label">Format</dt>
+            <dd class="meeting-schedule__meta-value" data-schedule-format></dd>
+          </div>
+          <div class="meeting-schedule__meta-item">
+            <dt class="meeting-schedule__meta-label">Location</dt>
+            <dd class="meeting-schedule__meta-value" data-schedule-location></dd>
+          </div>
+          <div class="meeting-schedule__meta-item">
+            <dt class="meeting-schedule__meta-label">Hosts</dt>
+            <dd class="meeting-schedule__meta-value" data-schedule-hosts></dd>
+          </div>
+        </dl>
+        <div class="meeting-schedule__actions">
+          <a class="meeting-schedule__join" data-schedule-join target="_blank" rel="noopener">Join Meeting</a>
+          <button class="meeting-schedule__copy" type="button" data-schedule-copy>Copy Link</button>
+          <button class="meeting-schedule__calendar" type="button" data-schedule-calendar>Add to Calendar</button>
+        </div>
+      </div>
+    </li>
+  </template>
+
   <script>
     document.getElementById('meeting-year').textContent = new Date().getFullYear();
+
+    (function () {
+      const meetingData = [
+        {
+          id: 'prayer-circle',
+          title: 'Prayer & Encouragement Circle',
+          description:
+            'Weekly voice gathering focused on Scripture, testimony, and live prayer support through the Power in Christ 10 Step rhythm.',
+          day: 2,
+          dayLabel: 'Tuesdays',
+          startTime: { hour: 20, minute: 0 },
+          durationMinutes: 75,
+          format: 'online',
+          formatLabel: 'Online Voice Room',
+          timezoneLabel: 'Eastern Time (ET)',
+          joinUrl: 'https://meet.jit.si/PowerInChristPrayerCircle',
+          joinLabel: 'Join Voice Room',
+          hosts: [
+            { name: 'Jonathan Marlow', role: 'Ministry Director' },
+            { name: 'Grace Torres', role: 'Prayer Captain' },
+          ],
+          listeners: [
+            'Anthony Reid',
+            'Bianca Lopez',
+            'Caleb Dorsey',
+            'Daniella Knight',
+            'Evelyn Carter',
+            'Felix Grant',
+            'Hannah Price',
+            'Isaac Romero',
+          ],
+          tags: ['Prayer Focus', 'Open Share', 'Step Study'],
+          location: 'Hosted on Jitsi — join from any browser or phone.',
+          notes: {
+            scripture: '“Cast all your anxiety on Him because He cares for you.” — 1 Peter 5:7',
+            prompts: [
+              'Invite Jesus to search our hearts for hidden burdens.',
+              'Pray for new participants beginning the recovery journey this month.',
+              'Cover ministry leaders and city chapters in intercession.',
+            ],
+            upcoming: 'Breakout prayer partners available immediately after this call for continued ministry time.',
+          },
+        },
+        {
+          id: 'mens-journey',
+          title: "Men's Journey Group",
+          description:
+            'Accountability and recovery coaching for men walking through the Power in Christ 10 Step plan with practical discipleship assignments.',
+          day: 4,
+          dayLabel: 'Thursdays',
+          startTime: { hour: 19, minute: 30 },
+          durationMinutes: 70,
+          format: 'online',
+          formatLabel: 'Online Video Room',
+          timezoneLabel: 'Eastern Time (ET)',
+          joinUrl: 'https://meet.jit.si/PowerInChristMensJourney',
+          joinLabel: 'Join Men\'s Room',
+          hosts: [
+            { name: 'Marcus Peterson', role: "Men's Coach" },
+            { name: 'Aaron Blake', role: 'Accountability Leader' },
+          ],
+          listeners: [
+            'Noah Fields',
+            'Patrick Simmons',
+            'Rafael Stone',
+            'Samir Patel',
+            'Thomas Gray',
+            'Victor Collins',
+          ],
+          tags: ['Men', 'Accountability', 'Step Coaching'],
+          location: 'Secure online video room — link provided after login.',
+          notes: {
+            scripture: '“Stand firm in the faith; be courageous; be strong.” — 1 Corinthians 16:13',
+            prompts: [
+              'Pray boldness over every man sharing testimony this week.',
+              'Ask the Spirit to reveal the next right step for each brother.',
+              'Bless accountability partners with renewed perseverance.',
+            ],
+            upcoming: 'Monthly service project briefing follows the session on the first Thursday of each month.',
+          },
+        },
+        {
+          id: 'womens-circle',
+          title: "Women's Recovery Circle",
+          description:
+            'In-person gathering with worship, testimony, and care teams designed for women pursuing whole-life recovery in Christ.',
+          day: 1,
+          dayLabel: 'Mondays',
+          startTime: { hour: 19, minute: 0 },
+          durationMinutes: 90,
+          format: 'in-person',
+          formatLabel: 'In-Person Gathering',
+          timezoneLabel: 'Central Time (CT)',
+          joinUrl: 'https://maps.app.goo.gl/ye7s6mMmHqPqgqfY9',
+          joinLabel: 'View Directions',
+          hosts: [
+            { name: 'Elena Brooks', role: 'Care Pastor' },
+            { name: 'Maya Chen', role: 'Hospitality Lead' },
+          ],
+          listeners: [
+            'Abigail Flores',
+            'Caroline Reese',
+            'Georgia Wells',
+            'Juliana Ortiz',
+            'Kara Mitchell',
+            'Lydia James',
+          ],
+          tags: ['Women', 'Testimony Night', 'Care Teams'],
+          location: 'Grace Community Church — 214 W Main St, Tulsa, OK 74103',
+          notes: {
+            scripture: '“The Lord is close to the brokenhearted and saves those who are crushed in spirit.” — Psalm 34:18',
+            prompts: [
+              'Pray covering over single parents attending for the first time.',
+              'Ask the Holy Spirit to release healing during prayer ministry.',
+              'Bless childcare volunteers with strength and joy.',
+            ],
+            upcoming: 'Pre-meeting coffee and connection starts at 6:30 PM in the fellowship hall.',
+          },
+        },
+        {
+          id: 'mentor-lab',
+          title: 'Mentor Equipping Lab',
+          description:
+            'Training cohort for chapter leaders and mentors focused on shepherding skills, trauma-aware care, and Spirit-led listening.',
+          day: 6,
+          dayLabel: 'Saturdays',
+          startTime: { hour: 9, minute: 0 },
+          durationMinutes: 80,
+          format: 'online',
+          formatLabel: 'Interactive Workshop',
+          timezoneLabel: 'Eastern Time (ET)',
+          joinUrl: 'https://meet.jit.si/PowerInChristMentorLab',
+          joinLabel: 'Join Training Room',
+          hosts: [
+            { name: 'Naomi Rivers', role: 'Mentor Coach' },
+            { name: 'Derrick Cole', role: 'Discipleship Director' },
+          ],
+          listeners: [
+            'Brenda Hughes',
+            'Claudia King',
+            'Edward Martin',
+            'Harper Lewis',
+            'Ian Walters',
+            'Mason Bryant',
+          ],
+          tags: ['Leaders', 'Training', 'Best Practices'],
+          location: 'Join via Jitsi — resources emailed after registration.',
+          notes: {
+            scripture: '“Equip his people for works of service, so that the body of Christ may be built up.” — Ephesians 4:12',
+            prompts: [
+              'Pray for mentors to shepherd from a place of rest.',
+              'Ask God to multiply new chapter launches in 2024.',
+              'Invite wisdom for care plans and follow-up conversations.',
+            ],
+            upcoming: 'Download the mentor workbook in advance and bring your latest care reports.',
+          },
+        },
+      ];
+
+      const stageElement = document.querySelector('[data-meeting-stage]');
+      const statusElement = document.querySelector('[data-meeting-status]');
+      const titleElement = document.querySelector('[data-meeting-title]');
+      const timeElement = document.querySelector('[data-meeting-time]');
+      const countdownElement = document.querySelector('[data-meeting-countdown]');
+      const metaElement = document.querySelector('[data-meeting-meta]');
+      const joinLink = document.querySelector('[data-meeting-join]');
+      const calendarButton = document.querySelector('[data-meeting-calendar]');
+      const copyButton = document.querySelector('[data-meeting-copy]');
+      const activeSpeakers = document.querySelector('[data-active-speakers]');
+      const activeListeners = document.querySelector('[data-active-listeners]');
+      const avatarTemplate = document.getElementById('meeting-avatar-template');
+      const scheduleList = document.querySelector('[data-schedule-list]');
+      const scheduleTemplate = document.getElementById('meeting-schedule-item-template');
+      const alertElement = document.querySelector('[data-meeting-alert]');
+      const filterButtons = Array.from(document.querySelectorAll('[data-filter]'));
+      const scriptureElement = document.querySelector('[data-note-scripture]');
+      const promptsElement = document.querySelector('[data-note-prompts]');
+      const upcomingElement = document.querySelector('[data-note-upcoming]');
+
+      if (!stageElement || !scheduleList) {
+        return;
+      }
+
+      const now = new Date();
+      const minute = 60 * 1000;
+      const hour = 60 * minute;
+      const day = 24 * hour;
+      const relativeFormatter = new Intl.RelativeTimeFormat(undefined, { numeric: 'auto' });
+      const dateTimeFormatter = new Intl.DateTimeFormat(undefined, {
+        weekday: 'short',
+        month: 'short',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+      });
+      const dayFormatter = new Intl.DateTimeFormat(undefined, { weekday: 'long', month: 'long', day: 'numeric' });
+      const timeFormatter = new Intl.DateTimeFormat(undefined, { hour: 'numeric', minute: '2-digit' });
+
+      const computeOccurrence = (meeting) => {
+        const today = new Date();
+        const upcoming = new Date(today);
+        const dayShift = (meeting.day - today.getDay() + 7) % 7;
+        upcoming.setDate(today.getDate() + dayShift);
+        upcoming.setHours(meeting.startTime.hour, meeting.startTime.minute, 0, 0);
+        if (upcoming <= today) {
+          upcoming.setDate(upcoming.getDate() + 7);
+        }
+
+        const previous = new Date(upcoming);
+        previous.setDate(previous.getDate() - 7);
+        const previousEnd = new Date(previous.getTime() + meeting.durationMinutes * minute);
+        const isLive = today >= previous && today <= previousEnd;
+
+        const activeStart = isLive ? previous : new Date(upcoming);
+        const activeEnd = new Date(activeStart.getTime() + meeting.durationMinutes * minute);
+
+        return {
+          isLive,
+          activeStart,
+          activeEnd,
+          nextStart: isLive ? upcoming : activeStart,
+          calendarStart: isLive ? upcoming : new Date(activeStart),
+        };
+      };
+
+      const formatRelative = (targetDate) => {
+        const diff = targetDate.getTime() - now.getTime();
+        const absDiff = Math.abs(diff);
+        if (absDiff < hour) {
+          const minutes = Math.round(diff / minute);
+          return relativeFormatter.format(minutes, 'minute');
+        }
+        if (absDiff < day) {
+          const hours = Math.round(diff / hour);
+          return relativeFormatter.format(hours, 'hour');
+        }
+        const days = Math.round(diff / day);
+        return relativeFormatter.format(days, 'day');
+      };
+
+      const renderAvatar = (person, role, container, isSpeaking) => {
+        if (!avatarTemplate || !container) {
+          return;
+        }
+        const clone = avatarTemplate.content.firstElementChild.cloneNode(true);
+        const initials = person
+          .split(/\s+/)
+          .map((part) => part[0])
+          .join('')
+          .slice(0, 2)
+          .toUpperCase();
+        clone.querySelector('.meeting-avatar__initials').textContent = initials;
+        clone.querySelector('.meeting-avatar__name').textContent = person;
+        const roleElement = clone.querySelector('.meeting-avatar__role');
+        if (role) {
+          roleElement.textContent = role;
+        } else {
+          roleElement.remove();
+        }
+        if (isSpeaking) {
+          clone.classList.add('meeting-avatar--speaking');
+        }
+        const ariaLabel = role ? `${person} — ${role}` : `${person} listening`;
+        clone.setAttribute('aria-label', ariaLabel);
+        container.appendChild(clone);
+      };
+
+      const setAlert = (message, tone = 'info') => {
+        if (!alertElement) {
+          return;
+        }
+        alertElement.textContent = message;
+        alertElement.dataset.tone = tone;
+        alertElement.hidden = false;
+        clearTimeout(alertElement._timeoutId);
+        alertElement._timeoutId = setTimeout(() => {
+          alertElement.hidden = true;
+        }, 5000);
+      };
+
+      const formatHosts = (hosts) => hosts.map((host) => host.name).join(', ');
+
+      const formatMeta = (meeting) => {
+        const parts = [`${meeting.durationMinutes} minutes`, meeting.formatLabel, `Hosted by ${formatHosts(meeting.hosts)}`];
+        return parts;
+      };
+
+      const clearChildren = (node) => {
+        while (node.firstChild) {
+          node.removeChild(node.firstChild);
+        }
+      };
+
+      const formatCalendarDate = (date) => date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+
+      const downloadCalendarInvite = (meeting, startDate) => {
+        const endDate = new Date(startDate.getTime() + meeting.durationMinutes * minute);
+        const hosts = formatHosts(meeting.hosts);
+        const joinInstruction =
+          meeting.format === 'in-person'
+            ? `Access details: ${meeting.joinUrl}`
+            : `Join link: ${meeting.joinUrl}`;
+        const descriptionText = `${meeting.description} Hosted by ${hosts}. ${joinInstruction}`.replace(/\n/g, ' ');
+        const lines = [
+          'BEGIN:VCALENDAR',
+          'VERSION:2.0',
+          'PRODID:-//Power in Christ Recovery//Meetings//EN',
+          'CALSCALE:GREGORIAN',
+          'BEGIN:VEVENT',
+          `UID:${meeting.id}-${startDate.getTime()}@powerinchristrecovery`,
+          `DTSTAMP:${formatCalendarDate(new Date())}`,
+          `DTSTART:${formatCalendarDate(startDate)}`,
+          `DTEND:${formatCalendarDate(endDate)}`,
+          `SUMMARY:${meeting.title}`,
+          `DESCRIPTION:${descriptionText}`,
+          `LOCATION:${meeting.format === 'in-person' ? meeting.location : meeting.joinUrl}`,
+          'END:VEVENT',
+          'END:VCALENDAR',
+        ];
+
+        const blob = new Blob([lines.join('\n')], { type: 'text/calendar' });
+        const url = URL.createObjectURL(blob);
+        const anchor = document.createElement('a');
+        anchor.href = url;
+        anchor.download = `${meeting.id}-${startDate.toISOString().slice(0, 10)}.ics`;
+        document.body.appendChild(anchor);
+        anchor.click();
+        anchor.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 0);
+        setAlert('Calendar reminder downloaded.', 'success');
+      };
+
+      const copyToClipboard = async (text) => {
+        if (!navigator.clipboard) {
+          const textArea = document.createElement('textarea');
+          textArea.value = text;
+          textArea.setAttribute('readonly', '');
+          textArea.style.position = 'absolute';
+          textArea.style.left = '-9999px';
+          document.body.appendChild(textArea);
+          textArea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textArea);
+          setAlert('Link copied to clipboard.', 'success');
+          return;
+        }
+        try {
+          await navigator.clipboard.writeText(text);
+          setAlert('Link copied to clipboard.', 'success');
+        } catch (error) {
+          console.error('Unable to copy link', error);
+          setAlert('Unable to copy link. Try again or open the meeting link directly.', 'error');
+        }
+      };
+
+      const meetingsWithTiming = meetingData.map((meeting) => ({
+        ...meeting,
+        timing: computeOccurrence(meeting),
+      }));
+
+      const scheduleItems = meetingsWithTiming
+        .map((meeting) => ({
+          ...meeting,
+          nextStart: meeting.timing.nextStart,
+        }))
+        .sort((a, b) => a.nextStart - b.nextStart);
+
+      const stageMeeting = meetingsWithTiming.find((meeting) => meeting.id === 'prayer-circle') || scheduleItems[0];
+
+      if (stageMeeting) {
+        const { timing } = stageMeeting;
+        const metaParts = formatMeta(stageMeeting);
+        statusElement.textContent = timing.isLive ? 'Live Now • Recovery Gathering' : 'Next Recovery Gathering';
+        titleElement.textContent = stageMeeting.title;
+        timeElement.textContent = `${stageMeeting.dayLabel} • ${timeFormatter.format(timing.activeStart)} ${stageMeeting.timezoneLabel}`;
+        const startLabel = `${dayFormatter.format(timing.activeStart)} at ${timeFormatter.format(timing.activeStart)}`;
+        countdownElement.textContent = timing.isLive
+          ? `Ends ${timeFormatter.format(timing.activeEnd)} (${formatRelative(timing.activeEnd)})`
+          : `Begins ${startLabel} (${formatRelative(timing.activeStart)})`;
+        clearChildren(metaElement);
+        metaParts.forEach((part) => {
+          const span = document.createElement('span');
+          span.className = 'meeting-stage__meta-item';
+          span.textContent = part;
+          metaElement.appendChild(span);
+        });
+        stageElement.dataset.live = String(timing.isLive);
+        joinLink.textContent = stageMeeting.joinLabel || 'Join Meeting';
+        joinLink.href = stageMeeting.joinUrl;
+
+        if (calendarButton) {
+          calendarButton.hidden = false;
+          calendarButton.textContent = timing.isLive ? 'Add Next Session to Calendar' : 'Add to Calendar';
+          calendarButton.addEventListener('click', () => downloadCalendarInvite(stageMeeting, timing.calendarStart));
+        }
+
+        if (copyButton) {
+          copyButton.hidden = false;
+          copyButton.addEventListener('click', () => copyToClipboard(stageMeeting.joinUrl));
+        }
+
+        if (activeSpeakers) {
+          clearChildren(activeSpeakers);
+          stageMeeting.hosts.forEach((host) => renderAvatar(host.name, host.role, activeSpeakers, true));
+        }
+
+        if (activeListeners) {
+          clearChildren(activeListeners);
+          stageMeeting.listeners.forEach((listener) => renderAvatar(listener, null, activeListeners, false));
+        }
+
+        if (scriptureElement && stageMeeting.notes?.scripture) {
+          scriptureElement.textContent = stageMeeting.notes.scripture;
+        }
+
+        if (promptsElement && stageMeeting.notes?.prompts) {
+          clearChildren(promptsElement);
+          stageMeeting.notes.prompts.forEach((prompt) => {
+            const li = document.createElement('li');
+            li.textContent = prompt;
+            promptsElement.appendChild(li);
+          });
+        }
+
+        if (upcomingElement && stageMeeting.notes?.upcoming) {
+          upcomingElement.textContent = stageMeeting.notes.upcoming;
+        }
+      }
+
+      const renderScheduleItem = (meeting) => {
+        if (!scheduleTemplate) {
+          return null;
+        }
+        const clone = scheduleTemplate.content.firstElementChild.cloneNode(true);
+        clone.dataset.type = meeting.format;
+        clone.querySelector('[data-schedule-day]').textContent = meeting.dayLabel;
+        clone.querySelector('[data-schedule-local]').textContent = `${dateTimeFormatter.format(meeting.nextStart)} (${meeting.timezoneLabel})`;
+        clone.querySelector('[data-schedule-title]').textContent = meeting.title;
+        clone.querySelector('[data-schedule-description]').textContent = meeting.description;
+        clone.querySelector('[data-schedule-format]').textContent = meeting.formatLabel;
+        clone.querySelector('[data-schedule-location]').textContent = meeting.location;
+        clone.querySelector('[data-schedule-hosts]').textContent = formatHosts(meeting.hosts);
+        const liveBadge = clone.querySelector('[data-schedule-live]');
+        if (meeting.timing.isLive) {
+          liveBadge.hidden = false;
+        }
+
+        const tagsList = clone.querySelector('[data-schedule-tags]');
+        if (meeting.tags?.length) {
+          meeting.tags.forEach((tag) => {
+            const tagItem = document.createElement('li');
+            tagItem.className = 'meeting-schedule__tag';
+            tagItem.textContent = tag;
+            tagsList.appendChild(tagItem);
+          });
+        } else {
+          tagsList.remove();
+        }
+
+        const joinAnchor = clone.querySelector('[data-schedule-join]');
+        joinAnchor.href = meeting.joinUrl;
+        joinAnchor.textContent = meeting.joinLabel || 'Join Meeting';
+        if (meeting.format === 'in-person' && meeting.joinUrl.startsWith('mailto:')) {
+          joinAnchor.removeAttribute('target');
+          joinAnchor.removeAttribute('rel');
+        }
+
+        const copyAction = clone.querySelector('[data-schedule-copy]');
+        if (copyAction) {
+          copyAction.addEventListener('click', () => copyToClipboard(meeting.joinUrl));
+          if (meeting.format === 'in-person' && meeting.joinUrl.startsWith('mailto:') && !navigator.clipboard) {
+            copyAction.hidden = true;
+          }
+        }
+
+        const calendarAction = clone.querySelector('[data-schedule-calendar]');
+        if (calendarAction) {
+          calendarAction.addEventListener('click', () => downloadCalendarInvite(meeting, meeting.timing.calendarStart));
+        }
+
+        return clone;
+      };
+
+      clearChildren(scheduleList);
+      scheduleItems.forEach((meeting) => {
+        const item = renderScheduleItem(meeting);
+        if (item) {
+          scheduleList.appendChild(item);
+        }
+      });
+
+      filterButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const { filter } = button.dataset;
+          filterButtons.forEach((btn) => btn.classList.toggle('meeting-filters__button--active', btn === button));
+          Array.from(scheduleList.children).forEach((item) => {
+            if (!(item instanceof HTMLElement)) {
+              return;
+            }
+            if (filter === 'all' || item.dataset.type === filter) {
+              item.hidden = false;
+            } else {
+              item.hidden = true;
+            }
+          });
+        });
+      });
+
+      if (!navigator.clipboard && copyButton) {
+        copyButton.hidden = true;
+      }
+    })();
   </script>
 </body>
 </html>
