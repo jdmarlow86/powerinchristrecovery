@@ -25,10 +25,7 @@
       </blockquote>
 
       <div class="support" data-support>
-        <button class="support__button" type="button" aria-haspopup="dialog" aria-expanded="false">
-          Support This Ministry
-        </button>
-        <div class="support__content" data-support-content hidden>
+        <div class="support__content" data-support-content>
           <div class="support__panel">
             <h2 class="support__title" id="support-modal-title">Support This Ministry</h2>
             <p class="support__subtitle">Choose your preferred platform:</p>
@@ -277,6 +274,15 @@
     if (support) {
       const button = support.querySelector('.support__button');
       const content = support.querySelector('[data-support-content]');
+
+      if (!button || !content) {
+        if (content) {
+          content.hidden = false;
+          content.removeAttribute('hidden');
+        }
+        return;
+      }
+
       const stylesheet = document.querySelector('link[rel="stylesheet"][href$="styles.css"]');
 
       const getPopupMarkup = () => {
