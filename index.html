@@ -320,64 +320,55 @@
           content.hidden = false;
           content.removeAttribute('hidden');
         }
-        return;
-      }
+      } else {
+        const stylesheet = document.querySelector('link[rel="stylesheet"][href$="styles.css"]');
 
-      const stylesheet = document.querySelector('link[rel="stylesheet"][href$="styles.css"]');
+        const getPopupMarkup = () => {
+          const clone = content.cloneNode(true);
+          clone.removeAttribute('hidden');
+          clone.querySelectorAll('[data-hide-in-popup]').forEach((node) => node.remove());
+          return clone.innerHTML;
+        };
 
-      const getPopupMarkup = () => {
-        if (!content) return '';
-        const clone = content.cloneNode(true);
-        clone.removeAttribute('hidden');
-        clone.querySelectorAll('[data-hide-in-popup]').forEach((node) => node.remove());
-        return clone.innerHTML;
-      };
-
-      const showInlineSupport = () => {
-        if (!content) return;
-        content.hidden = false;
-        content.removeAttribute('hidden');
-        if (button) {
+        const showInlineSupport = () => {
+          content.hidden = false;
+          content.removeAttribute('hidden');
           button.setAttribute('aria-expanded', 'true');
-        }
-      };
+        };
 
-      const hideInlineSupport = () => {
-        if (!content) return;
-        content.hidden = true;
-        content.setAttribute('hidden', '');
-        if (button) {
+        const hideInlineSupport = () => {
+          content.hidden = true;
+          content.setAttribute('hidden', '');
           button.setAttribute('aria-expanded', 'false');
-        }
-      };
+        };
 
-      const openSupportWindow = () => {
-        const width = 480;
-        const height = 520;
-        const left = Math.round(window.screenX + Math.max((window.outerWidth - width) / 2, 0));
-        const top = Math.round(window.screenY + Math.max((window.outerHeight - height) / 2, 0));
-        const features = `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes`;
-        if (previousPopup && !previousPopup.closed) {
-          try {
-            previousPopup.close();
-          } catch (error) {
-            console.error('Unable to close previous support window:', error);
+        const openSupportWindow = () => {
+          const width = 480;
+          const height = 520;
+          const left = Math.round(window.screenX + Math.max((window.outerWidth - width) / 2, 0));
+          const top = Math.round(window.screenY + Math.max((window.outerHeight - height) / 2, 0));
+          const features = `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes`;
+          if (previousPopup && !previousPopup.closed) {
+            try {
+              previousPopup.close();
+            } catch (error) {
+              console.error('Unable to close previous support window:', error);
+            }
           }
-        }
 
-        const popupName = `supportOptions-${Date.now()}`;
-        const popup = window.open('', popupName, features);
+          const popupName = `supportOptions-${Date.now()}`;
+          const popup = window.open('', popupName, features);
 
-        if (!popup) {
-          return null;
-        }
+          if (!popup) {
+            return null;
+          }
 
-        const markup = getPopupMarkup();
-        const stylesheetHref = stylesheet ? stylesheet.getAttribute('href') : null;
+          const markup = getPopupMarkup();
+          const stylesheetHref = stylesheet ? stylesheet.getAttribute('href') : null;
 
-        try {
-          popup.document.open();
-          popup.document.write(`<!DOCTYPE html>
+          try {
+            popup.document.open();
+            popup.document.write(`<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -391,35 +382,34 @@
     </main>
   </body>
 </html>`);
-          popup.document.close();
+            popup.document.close();
 
-          popup.addEventListener('load', () => {
-            const firstLink = popup.document.querySelector('.support__list a');
-            if (firstLink) {
-              firstLink.focus();
+            popup.addEventListener('load', () => {
+              const firstLink = popup.document.querySelector('.support__list a');
+              if (firstLink) {
+                firstLink.focus();
+              }
+            });
+
+            popup.focus();
+            previousPopup = popup;
+            return popup;
+          } catch (error) {
+            console.error('Unable to render support window:', error);
+            try {
+              popup.close();
+            } catch (closeError) {
+              console.error('Unable to close failed support window:', closeError);
             }
-          });
-
-          popup.focus();
-          previousPopup = popup;
-          return popup;
-        } catch (error) {
-          console.error('Unable to render support window:', error);
-          try {
-            popup.close();
-          } catch (closeError) {
-            console.error('Unable to close failed support window:', closeError);
+            return null;
           }
-          return null;
-        }
-      };
+        };
 
-      if (button) {
         button.addEventListener('click', () => {
           const popup = openSupportWindow();
 
           if (!popup) {
-            if (content && content.hasAttribute('hidden')) {
+            if (content.hasAttribute('hidden')) {
               showInlineSupport();
             } else {
               hideInlineSupport();
@@ -430,6 +420,14 @@
         });
       }
     }
+
+    window.addEventListener('unhandledrejection', (event) => {
+      const reason = event?.reason;
+      if (reason && /MetaMask extension not found/i.test(reason.message || reason)) {
+        event.preventDefault();
+        console.info('MetaMask extension not detected; wallet connection skipped.');
+      }
+    });
 
     const newsletterForm = document.querySelector('[data-newsletter-form]');
     if (newsletterForm) {
