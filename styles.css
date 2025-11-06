@@ -94,6 +94,10 @@ img {
   overflow: hidden;
 }
 
+.hero--subpage {
+  padding: clamp(3rem, 10vw, 6rem) 0;
+}
+
 .hero__overlay {
   position: absolute;
   inset: 0;
