@@ -1,4 +1,7 @@
-    document.getElementById('year').textContent = new Date().getFullYear();
+    const globalYear = document.getElementById('year');
+    if (globalYear) {
+      globalYear.textContent = new Date().getFullYear();
+    }
 
     const support = document.querySelector('[data-support]');
     if (support) {
@@ -925,7 +928,9 @@
 
           persistTestimonies(testimonies);
           renderTestimonies();
-          announce(`Comment added${authorValue ? ` by ${authorValue}` : ''}.`);
+          commentNameInput.value = '';
+          commentMessageInput.value = '';
+          announce(`New comment posted${authorValue ? ` by ${authorValue}` : ''}.`);
 
           window.requestAnimationFrame(() => {
             if (!list) {
