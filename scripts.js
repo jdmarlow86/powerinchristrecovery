@@ -1,3 +1,4 @@
+(() => {
     const globalYear = document.getElementById('year');
     if (globalYear) {
       globalYear.textContent = new Date().getFullYear();
@@ -1055,3 +1056,5 @@
         });
       }
     }
+
+})();
