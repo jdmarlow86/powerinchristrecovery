@@ -547,3 +547,506 @@
       }
     }
   
+
+    const testimonyBoard = document.querySelector('[data-testimony-board]');
+    if (testimonyBoard) {
+      const TESTIMONY_STORAGE_KEY = 'picr:testimonies';
+      const form = document.querySelector('[data-testimony-form]');
+      const nameInput = form ? form.querySelector('input[name="name"]') : null;
+      const storyInput = form ? form.querySelector('textarea[name="story"]') : null;
+      const successFeedback = form ? form.querySelector('[data-testimony-feedback]') : null;
+      const errorFeedback = form ? form.querySelector('[data-testimony-error]') : null;
+      const list = testimonyBoard.querySelector('[data-testimony-list]');
+      const emptyState = testimonyBoard.querySelector('[data-testimony-empty]');
+      const announcer = testimonyBoard.querySelector('[data-testimony-announcer]');
+
+      if (!list) {
+        console.warn('Testimony wall could not find a list container.');
+        return;
+      }
+
+      let storageEnabled = true;
+      let feedbackTimer = null;
+
+      const createId = (prefix) => `${prefix}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+
+      const readFromStorage = () => {
+        if (!storageEnabled) {
+          return null;
+        }
+        try {
+          return window.localStorage.getItem(TESTIMONY_STORAGE_KEY);
+        } catch (error) {
+          console.warn('Testimony storage read failed:', error);
+          storageEnabled = false;
+          return null;
+        }
+      };
+
+      const writeToStorage = (items) => {
+        if (!storageEnabled) {
+          return;
+        }
+        try {
+          window.localStorage.setItem(TESTIMONY_STORAGE_KEY, JSON.stringify(items));
+        } catch (error) {
+          console.warn('Testimony storage write failed:', error);
+          storageEnabled = false;
+        }
+      };
+
+      const formatTimestamp = (value) => {
+        if (!value) {
+          return '';
+        }
+        try {
+          return new Intl.DateTimeFormat('en-US', {
+            dateStyle: 'medium',
+            timeStyle: 'short'
+          }).format(new Date(value));
+        } catch (error) {
+          console.warn('Unable to format testimony timestamp:', error);
+          return '';
+        }
+      };
+
+      const announce = (message) => {
+        if (!announcer || !message) {
+          return;
+        }
+        announcer.textContent = '';
+        window.requestAnimationFrame(() => {
+          announcer.textContent = message;
+        });
+      };
+
+      const normalizeComment = (comment) => {
+        if (!comment) {
+          return null;
+        }
+        const body = typeof comment.message === 'string' ? comment.message.trim() : '';
+        if (!body) {
+          return null;
+        }
+        return {
+          id: comment.id || createId('c'),
+          author: typeof comment.author === 'string' ? comment.author.trim() : '',
+          message: body,
+          createdAt: comment.createdAt || new Date().toISOString()
+        };
+      };
+
+      const normalizeTestimony = (entry) => {
+        if (!entry) {
+          return null;
+        }
+        const message = typeof entry.message === 'string' ? entry.message.trim() : '';
+        if (!message) {
+          return null;
+        }
+        const comments = Array.isArray(entry.comments)
+          ? entry.comments.map((comment) => normalizeComment(comment)).filter(Boolean)
+          : [];
+        return {
+          id: entry.id || createId('t'),
+          author: typeof entry.author === 'string' ? entry.author.trim() : '',
+          message,
+          createdAt: entry.createdAt || new Date().toISOString(),
+          comments
+        };
+      };
+
+      const sortTestimonies = (items) =>
+        items
+          .slice()
+          .sort(
+            (a, b) => new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime()
+          );
+
+      const parseStoredTestimonies = () => {
+        const stored = readFromStorage();
+        if (!stored) {
+          return null;
+        }
+        try {
+          const parsed = JSON.parse(stored);
+          return Array.isArray(parsed) ? parsed : null;
+        } catch (error) {
+          console.warn('Testimony storage parse failed:', error);
+          return null;
+        }
+      };
+
+      const defaultTestimonies = [
+        {
+          id: 't-seed-hope',
+          author: 'Maria',
+          message:
+            'After months of wrestling with addiction, Jesus met me in a Tuesday night meeting. The urge to use broke as we prayed together, and I have been walking in freedom for six months. Praise God for this community! ❤️',
+          createdAt: '2024-02-15T18:30:00.000Z',
+          comments: [
+            {
+              id: 'c-seed-hope-1',
+              author: 'James',
+              message: 'Celebrating with you, Maria. Keep leaning into His strength! 🙌',
+              createdAt: '2024-02-16T09:00:00.000Z'
+            }
+          ]
+        },
+        {
+          id: 't-seed-community',
+          author: 'Chris',
+          message:
+            'This ministry surrounded my family when my brother relapsed. We prayed, fasted, and saw him choose treatment the very next day. The Body of Christ is powerful when we move as one.',
+          createdAt: '2024-03-22T13:10:00.000Z',
+          comments: [
+            {
+              id: 'c-seed-community-1',
+              author: 'Angela',
+              message: 'Thank you for sharing. Your testimony gives me hope for my son.',
+              createdAt: '2024-03-22T18:42:00.000Z'
+            },
+            {
+              id: 'c-seed-community-2',
+              author: 'Jonathan',
+              message: 'We continue to pray for your family, Chris. God is faithful.',
+              createdAt: '2024-03-23T10:18:00.000Z'
+            }
+          ]
+        }
+      ];
+
+      let testimonies = sortTestimonies(
+        (parseStoredTestimonies() || defaultTestimonies).map((entry) => normalizeTestimony(entry)).filter(Boolean)
+      );
+
+      const persistTestimonies = (items) => {
+        writeToStorage(items);
+      };
+
+      const showFormFeedback = (message, type = 'success') => {
+        if (feedbackTimer) {
+          window.clearTimeout(feedbackTimer);
+          feedbackTimer = null;
+        }
+
+        if (successFeedback) {
+          successFeedback.hidden = true;
+          successFeedback.textContent = '';
+        }
+
+        if (errorFeedback) {
+          errorFeedback.hidden = true;
+          errorFeedback.textContent = '';
+        }
+
+        if (!message) {
+          return;
+        }
+
+        const target = type === 'error' ? errorFeedback : successFeedback;
+        if (!target) {
+          return;
+        }
+
+        target.textContent = message;
+        target.hidden = false;
+
+        const duration = type === 'error' ? 9000 : 6000;
+        feedbackTimer = window.setTimeout(() => {
+          target.hidden = true;
+          target.textContent = '';
+          feedbackTimer = null;
+        }, duration);
+      };
+
+      const createTestimonyCard = (testimony) => {
+        const article = document.createElement('article');
+        article.className = 'testimony-card';
+        article.dataset.testimonyId = testimony.id;
+
+        const header = document.createElement('header');
+        header.className = 'testimony-card__header';
+
+        const title = document.createElement('h3');
+        title.className = 'testimony-card__name';
+        title.textContent = testimony.author || 'Anonymous';
+        header.append(title);
+
+        const meta = document.createElement('p');
+        meta.className = 'testimony-card__meta';
+        meta.textContent = formatTimestamp(testimony.createdAt);
+        if (meta.textContent) {
+          header.append(meta);
+        }
+
+        const message = document.createElement('p');
+        message.className = 'testimony-card__message';
+        message.textContent = testimony.message;
+
+        article.append(header, message);
+
+        const commentsSection = document.createElement('section');
+        commentsSection.className = 'testimony-card__comments';
+
+        const commentsTitle = document.createElement('h4');
+        commentsTitle.className = 'testimony-card__comments-title';
+        const commentCount = testimony.comments.length;
+        commentsTitle.textContent =
+          commentCount === 0 ? 'Comments' : `${commentCount} ${commentCount === 1 ? 'Comment' : 'Comments'}`;
+        commentsSection.append(commentsTitle);
+
+        const commentsList = document.createElement('ul');
+        commentsList.className = 'comment-list';
+        commentsSection.append(commentsList);
+
+        testimony.comments.forEach((comment) => {
+          const item = document.createElement('li');
+          item.className = 'comment';
+          item.dataset.commentItem = 'true';
+          item.dataset.commentId = comment.id;
+
+          const commentMeta = document.createElement('p');
+          commentMeta.className = 'comment__meta';
+
+          const author = document.createElement('span');
+          author.className = 'comment__author';
+          author.textContent = comment.author || 'Anonymous';
+          commentMeta.append(author);
+
+          const timeText = formatTimestamp(comment.createdAt);
+          if (timeText) {
+            const separator = document.createElement('span');
+            separator.setAttribute('aria-hidden', 'true');
+            separator.textContent = '•';
+            const time = document.createElement('span');
+            time.textContent = timeText;
+            commentMeta.append(separator, time);
+          }
+
+          item.append(commentMeta);
+
+          const body = document.createElement('p');
+          body.className = 'comment__message';
+          body.textContent = comment.message;
+          item.append(body);
+
+          commentsList.append(item);
+        });
+
+        if (commentCount === 0) {
+          const commentHint = document.createElement('p');
+          commentHint.className = 'comment-form__note';
+          commentHint.textContent = 'Be the first to encourage this story.';
+          commentsSection.append(commentHint);
+        }
+
+        const commentForm = document.createElement('form');
+        commentForm.className = 'comment-form';
+        commentForm.setAttribute(
+          'aria-label',
+          `Leave a comment on ${testimony.author ? `${testimony.author}'s` : 'this'} testimony`
+        );
+
+        const formGrid = document.createElement('div');
+        formGrid.className = 'comment-form__grid';
+
+        const commentNameField = document.createElement('div');
+        commentNameField.className = 'comment-form__field';
+        const commentNameLabel = document.createElement('label');
+        const nameFieldId = `comment-name-${testimony.id}`;
+        commentNameLabel.className = 'comment-form__label';
+        commentNameLabel.setAttribute('for', nameFieldId);
+        commentNameLabel.textContent = 'Name (optional)';
+        const commentNameInput = document.createElement('input');
+        commentNameInput.className = 'comment-form__input';
+        commentNameInput.type = 'text';
+        commentNameInput.id = nameFieldId;
+        commentNameInput.name = 'name';
+        commentNameInput.maxLength = 80;
+        commentNameInput.placeholder = 'Add your name';
+        commentNameField.append(commentNameLabel, commentNameInput);
+
+        const commentMessageField = document.createElement('div');
+        commentMessageField.className = 'comment-form__field comment-form__field--full';
+        const messageFieldId = `comment-message-${testimony.id}`;
+        const commentMessageLabel = document.createElement('label');
+        commentMessageLabel.className = 'comment-form__label';
+        commentMessageLabel.setAttribute('for', messageFieldId);
+        commentMessageLabel.textContent = 'Comment';
+        const commentMessageInput = document.createElement('textarea');
+        commentMessageInput.className = 'comment-form__textarea';
+        commentMessageInput.id = messageFieldId;
+        commentMessageInput.name = 'message';
+        commentMessageInput.rows = 3;
+        commentMessageInput.required = true;
+        commentMessageInput.maxLength = 600;
+        commentMessageInput.placeholder = 'Share encouragement or a prayer.';
+        commentMessageField.append(commentMessageLabel, commentMessageInput);
+
+        formGrid.append(commentNameField, commentMessageField);
+        commentForm.append(formGrid);
+
+        const formActions = document.createElement('div');
+        formActions.className = 'comment-form__actions';
+        const submitButton = document.createElement('button');
+        submitButton.className = 'comment-form__button';
+        submitButton.type = 'submit';
+        submitButton.textContent = 'Post Comment';
+        formActions.append(submitButton);
+        commentForm.append(formActions);
+
+        commentForm.addEventListener('submit', (event) => {
+          event.preventDefault();
+
+          const authorValue = commentNameInput.value.trim();
+          const messageValue = commentMessageInput.value.trim();
+
+          if (!messageValue) {
+            commentMessageInput.setCustomValidity('Please share a short comment before posting.');
+            commentMessageInput.reportValidity();
+            commentMessageInput.setCustomValidity('');
+            return;
+          }
+
+          const newComment = {
+            id: createId('c'),
+            author: authorValue,
+            message: messageValue,
+            createdAt: new Date().toISOString()
+          };
+
+          testimonies = testimonies.map((item) => {
+            if (item.id !== testimony.id) {
+              return item;
+            }
+            return { ...item, comments: [...item.comments, newComment] };
+          });
+
+          persistTestimonies(testimonies);
+          renderTestimonies();
+          announce(`Comment added${authorValue ? ` by ${authorValue}` : ''}.`);
+
+          window.requestAnimationFrame(() => {
+            if (!list) {
+              return;
+            }
+            const updatedCard = list.querySelector(`[data-testimony-id="${testimony.id}"]`);
+            if (!updatedCard) {
+              return;
+            }
+            const newCommentNode = updatedCard.querySelector(`[data-comment-id="${newComment.id}"]`);
+            if (newCommentNode) {
+              newCommentNode.classList.add('comment--highlight');
+              newCommentNode.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+              window.setTimeout(() => {
+                newCommentNode.classList.remove('comment--highlight');
+              }, 4000);
+            }
+            const commentField = updatedCard.querySelector(`#${messageFieldId}`);
+            if (commentField) {
+              commentField.focus();
+            }
+          });
+        });
+
+        commentsSection.append(commentForm);
+        article.append(commentsSection);
+
+        return article;
+      };
+
+      const renderTestimonies = () => {
+        if (!list) {
+          return;
+        }
+
+        list.innerHTML = '';
+
+        if (!testimonies.length) {
+          if (emptyState) {
+            emptyState.hidden = false;
+          }
+          return;
+        }
+
+        if (emptyState) {
+          emptyState.hidden = true;
+        }
+
+        testimonies.forEach((testimony) => {
+          list.append(createTestimonyCard(testimony));
+        });
+      };
+
+      renderTestimonies();
+
+      if (form) {
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+
+          const nameValue = nameInput ? nameInput.value.trim() : '';
+          const storyValue = storyInput ? storyInput.value.trim() : '';
+
+          if (!storyValue) {
+            if (storyInput) {
+              storyInput.setCustomValidity('Please share a brief testimony before posting.');
+              storyInput.reportValidity();
+              storyInput.setCustomValidity('');
+              storyInput.focus();
+            }
+            showFormFeedback('Please share a brief testimony before posting.', 'error');
+            return;
+          }
+
+          if (storyValue.length < 12) {
+            if (storyInput) {
+              storyInput.setCustomValidity('Please share a few more details (at least 12 characters).');
+              storyInput.reportValidity();
+              storyInput.setCustomValidity('');
+              storyInput.focus();
+            }
+            showFormFeedback('Please share a few more details (at least 12 characters).', 'error');
+            return;
+          }
+
+          const newTestimony = {
+            id: createId('t'),
+            author: nameValue,
+            message: storyValue,
+            createdAt: new Date().toISOString(),
+            comments: []
+          };
+
+          testimonies = sortTestimonies([newTestimony, ...testimonies]);
+          persistTestimonies(testimonies);
+          renderTestimonies();
+
+          if (form) {
+            form.reset();
+          }
+
+          showFormFeedback('Thank you for sharing! Your testimony has been posted.');
+          announce('Testimony posted to the community wall.');
+
+          window.requestAnimationFrame(() => {
+            if (!list) {
+              return;
+            }
+            const newCard = list.querySelector(`[data-testimony-id="${newTestimony.id}"]`);
+            if (newCard) {
+              newCard.classList.add('testimony-card--highlight');
+              newCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              window.setTimeout(() => {
+                newCard.classList.remove('testimony-card--highlight');
+              }, 6000);
+
+              const commentTextarea = newCard.querySelector('textarea[name="message"]');
+              if (commentTextarea) {
+                commentTextarea.focus();
+              }
+            }
+          });
+        });
+      }
+    }

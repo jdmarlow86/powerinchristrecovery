@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Testimonies | Power in Christ Recovery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav class="site-nav" aria-label="Primary">
+    <div class="site-nav__brand">
+      <a class="site-nav__home" href="index.html">Power in Christ Recovery</a>
+    </div>
+    <div class="site-nav__links">
+      <a class="site-nav__link" href="index.html">Home</a>
+      <a class="site-nav__link site-nav__link--active" href="testimonies.html">Testimonies</a>
+      <a class="site-nav__link" href="affiliates.html">Affiliates</a>
+      <a class="site-nav__link" href="meeting.html">Meetings</a>
+    </div>
+  </nav>
+
+  <header class="hero hero--subpage">
+    <div class="hero__overlay"></div>
+    <div class="hero__content container">
+      <h1>Testimony Wall</h1>
+      <p class="tagline">Celebrate stories of healing and hope through Jesus.</p>
+      <p class="intro">
+        God is moving in powerful ways through this community. Share what He has done, encourage fellow travelers on the road
+        to recovery, and respond with prayer-filled comments. Your story could be the spark of hope someone needs today.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <section class="section container" aria-labelledby="share-testimony">
+      <div class="section__header">
+        <h2 id="share-testimony">Share Your Testimony</h2>
+        <p class="section__subtitle">Speak life into our community by telling how Christ has been at work.</p>
+      </div>
+      <form class="testimony-form" data-testimony-form>
+        <fieldset class="testimony-form__fieldset">
+          <legend class="testimony-form__legend">Tell your story</legend>
+          <div class="testimony-form__grid">
+            <div class="testimony-form__field">
+              <label class="testimony-form__label" for="testimony-name">Name (optional)</label>
+              <input
+                class="testimony-form__input"
+                type="text"
+                id="testimony-name"
+                name="name"
+                maxlength="80"
+                placeholder="How should we attribute your testimony?"
+              />
+            </div>
+            <div class="testimony-form__field testimony-form__field--full">
+              <label class="testimony-form__label" for="testimony-story">Your testimony</label>
+              <textarea
+                class="testimony-form__textarea"
+                id="testimony-story"
+                name="story"
+                rows="5"
+                maxlength="1600"
+                required
+                placeholder="Share what Jesus has done in your life, a breakthrough moment, or a prayer He has answered."
+              ></textarea>
+            </div>
+          </div>
+          <div class="testimony-form__actions">
+            <button class="testimony-form__button" type="submit">Post Testimony</button>
+          </div>
+          <p class="testimony-form__hint">
+            Testimonies are saved to your device so you can revisit and continue the conversation. Clearing your browser history
+            may remove previous posts.
+          </p>
+          <p class="testimony-form__feedback" data-testimony-feedback hidden role="status" aria-live="polite"></p>
+          <p
+            class="testimony-form__feedback testimony-form__feedback--error"
+            data-testimony-error
+            hidden
+            role="alert"
+            aria-live="assertive"
+          ></p>
+        </fieldset>
+      </form>
+    </section>
+
+    <section class="section section--muted" data-testimony-board aria-labelledby="testimony-wall">
+      <div class="container">
+        <div class="section__header">
+          <h2 id="testimony-wall">Community Testimony Wall</h2>
+          <p class="section__subtitle">Read and respond to stories of transformation.</p>
+        </div>
+        <div class="testimony-list" data-testimony-list aria-live="polite"></div>
+        <p class="testimony-empty" data-testimony-empty role="status">
+          Be the first to share how God is moving—your testimony will appear here.
+        </p>
+        <div class="visually-hidden" aria-live="polite" data-testimony-announcer></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> Power in Christ Recovery. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
