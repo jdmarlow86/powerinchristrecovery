@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Affiliates | Power in Christ Recovery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav class="site-nav" aria-label="Primary">
+    <div class="site-nav__brand">
+      <a class="site-nav__home" href="index.html">Power in Christ Recovery</a>
+    </div>
+    <div class="site-nav__links">
+      <a class="site-nav__link" href="index.html">Home</a>
+      <a class="site-nav__link site-nav__link--active" href="affiliates.html">Affiliates</a>
+      <a class="site-nav__link" href="meeting.html">Meetings</a>
+    </div>
+  </nav>
+
+  <header class="hero hero--subpage">
+    <div class="hero__overlay"></div>
+    <div class="hero__content container">
+      <h1>Affiliates</h1>
+      <p class="tagline">Partner ministries serving alongside Power in Christ Recovery.</p>
+      <p class="intro">
+        Our affiliate ministries help extend Christ-centered recovery care into new communities. Explore trusted partners,
+        discover local support, and connect with leaders who share the mission of restoration through Jesus.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <section class="section container" aria-labelledby="affiliates-title">
+      <div class="section__header">
+        <h2 id="affiliates-title">Affiliate Ministries</h2>
+        <p class="section__subtitle">Trusted partners walking alongside Power in Christ Recovery.</p>
+      </div>
+      <div class="affiliates" data-affiliates>
+        <div class="affiliates__grid" data-affiliates-list aria-live="polite"></div>
+        <p class="affiliates__empty" data-affiliates-empty hidden role="status">
+          Affiliate ministries will appear here as they are added.
+        </p>
+      </div>
+      <template id="affiliate-card-template">
+        <article class="affiliate-card">
+          <div class="affiliate-card__header">
+            <h3 class="affiliate-card__title">
+              <a class="affiliate-card__link" data-affiliate-link target="_blank" rel="noopener"></a>
+            </h3>
+            <p class="affiliate-card__tagline" data-affiliate-tagline></p>
+          </div>
+          <p class="affiliate-card__description" data-affiliate-description></p>
+          <div class="affiliate-card__details">
+            <a class="affiliate-card__website" data-affiliate-website target="_blank" rel="noopener"></a>
+            <p class="affiliate-card__contact" data-affiliate-contact></p>
+          </div>
+        </article>
+      </template>
+      <div class="affiliate-admin" data-affiliate-admin-panel>
+        <button
+          class="affiliate-admin__button"
+          type="button"
+          data-affiliate-admin
+          data-passcode-hash="e703972548e0ded6e8f20c1a874f9700efd87133fb11f8cc0452a4b100a9b691"
+          data-passcode-fallback="UG93ZXJJbkNocmlzdEFmZmlsaWF0ZXMyMDI0IQ=="
+          aria-expanded="false"
+        >
+          Admin: Add Affiliate
+        </button>
+        <form class="affiliate-form" data-affiliate-form hidden novalidate>
+          <fieldset class="affiliate-form__fieldset">
+            <legend class="affiliate-form__legend">Add Affiliate</legend>
+            <div class="affiliate-form__grid">
+              <div class="affiliate-form__field">
+                <label class="affiliate-form__label" for="affiliate-name">Ministry Name</label>
+                <input class="affiliate-form__input" type="text" id="affiliate-name" name="name" required />
+              </div>
+              <div class="affiliate-form__field">
+                <label class="affiliate-form__label" for="affiliate-tagline">Tagline (optional)</label>
+                <input class="affiliate-form__input" type="text" id="affiliate-tagline" name="tagline" />
+              </div>
+              <div class="affiliate-form__field">
+                <label class="affiliate-form__label" for="affiliate-website">Website</label>
+                <input class="affiliate-form__input" type="url" id="affiliate-website" name="website" required />
+              </div>
+              <div class="affiliate-form__field">
+                <label class="affiliate-form__label" for="affiliate-contact">Contact Email (optional)</label>
+                <input class="affiliate-form__input" type="email" id="affiliate-contact" name="contact" />
+              </div>
+            </div>
+            <div class="affiliate-form__field affiliate-form__field--full">
+              <label class="affiliate-form__label" for="affiliate-description">Description</label>
+              <textarea
+                class="affiliate-form__textarea"
+                id="affiliate-description"
+                name="description"
+                rows="4"
+                required
+              ></textarea>
+            </div>
+            <div class="affiliate-form__actions">
+              <button class="affiliate-form__button" type="submit">Save Affiliate</button>
+              <button class="affiliate-form__button affiliate-form__button--secondary" type="button" data-affiliate-cancel>
+                Cancel
+              </button>
+            </div>
+            <p class="affiliate-form__hint">
+              Use concise, ministry-focused language. Updates save to this browser and appear immediately.
+            </p>
+            <p class="affiliate-form__feedback" data-affiliate-feedback hidden role="status" aria-live="polite"></p>
+          </fieldset>
+        </form>
+      </div>
+    </section>
+
+    <section class="section section--accent" aria-labelledby="partnership">
+      <div class="container connect">
+        <div class="section__header">
+          <h2 id="partnership">Partner With Us</h2>
+        </div>
+        <div class="connect__content">
+          <ul class="list list--plain">
+            <li><strong>Start a chapter:</strong> <a href="index.html#create-chapter">Explore the launch guide</a></li>
+            <li><strong>Share an affiliate:</strong> Email <a href="mailto:mybiblebelt@gmail.com">mybiblebelt@gmail.com</a></li>
+            <li><strong>Support the mission:</strong> <a href="index.html#support">Give through our secure platforms</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> Power in Christ Recovery. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
