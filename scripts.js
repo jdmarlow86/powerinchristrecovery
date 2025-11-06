@@ -681,44 +681,7 @@
         }
       };
 
-      const defaultTestimonies = [
-        {
-          id: 't-seed-hope',
-          author: 'Maria',
-          message:
-            'After months of wrestling with addiction, Jesus met me in a Tuesday night meeting. The urge to use broke as we prayed together, and I have been walking in freedom for six months. Praise God for this community! ❤️',
-          createdAt: '2024-02-15T18:30:00.000Z',
-          comments: [
-            {
-              id: 'c-seed-hope-1',
-              author: 'James',
-              message: 'Celebrating with you, Maria. Keep leaning into His strength! 🙌',
-              createdAt: '2024-02-16T09:00:00.000Z'
-            }
-          ]
-        },
-        {
-          id: 't-seed-community',
-          author: 'Chris',
-          message:
-            'This ministry surrounded my family when my brother relapsed. We prayed, fasted, and saw him choose treatment the very next day. The Body of Christ is powerful when we move as one.',
-          createdAt: '2024-03-22T13:10:00.000Z',
-          comments: [
-            {
-              id: 'c-seed-community-1',
-              author: 'Angela',
-              message: 'Thank you for sharing. Your testimony gives me hope for my son.',
-              createdAt: '2024-03-22T18:42:00.000Z'
-            },
-            {
-              id: 'c-seed-community-2',
-              author: 'Jonathan',
-              message: 'We continue to pray for your family, Chris. God is faithful.',
-              createdAt: '2024-03-23T10:18:00.000Z'
-            }
-          ]
-        }
-      ];
+      const defaultTestimonies = [];
 
       let testimonies = sortTestimonies(
         (parseStoredTestimonies() || defaultTestimonies).map((entry) => normalizeTestimony(entry)).filter(Boolean)
