@@ -325,6 +325,45 @@ img {
   text-decoration: underline;
 }
 
+.support-page {
+  display: grid;
+  gap: clamp(2rem, 6vw, 4rem);
+}
+
+@media (min-width: 768px) {
+  .support-page {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 420px);
+    align-items: start;
+  }
+
+  .support-page__message {
+    margin: 0;
+  }
+}
+
+.support-page__message {
+  display: grid;
+  gap: 1.25rem;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.support-page__panel {
+  display: flex;
+  justify-content: center;
+}
+
+.support-page__prayer {
+  display: grid;
+  gap: 1rem;
+  text-align: center;
+  max-width: 720px;
+}
+
+.support-page__prayer p {
+  margin: 0 auto;
+}
+
 .section {
   padding: clamp(3rem, 8vw, 5rem) 0;
 }
