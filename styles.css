@@ -481,6 +481,103 @@ img {
   font-size: 1.05rem;
 }
 
+.chapter-table-wrapper {
+  margin-top: clamp(1.5rem, 4vw, 2.5rem);
+  background: var(--color-light);
+  border-radius: 1.25rem;
+  box-shadow: 0 1.5rem 3rem -1.75rem rgba(35, 48, 67, 0.35);
+  border: 1px solid rgba(35, 48, 67, 0.08);
+  overflow-x: auto;
+}
+
+.chapter-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+.chapter-table caption {
+  caption-side: top;
+  text-align: left;
+  font-weight: 700;
+  padding: 1.5rem 2rem 0.75rem;
+  font-size: 1.1rem;
+  color: var(--color-primary);
+}
+
+.chapter-table th,
+.chapter-table td {
+  padding: 1rem 2rem;
+  border-bottom: 1px solid rgba(35, 48, 67, 0.08);
+  text-align: left;
+}
+
+.chapter-table th {
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(35, 48, 67, 0.7);
+  background: rgba(42, 76, 115, 0.05);
+}
+
+.chapter-table td a {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.chapter-table td a:hover,
+.chapter-table td a:focus-visible {
+  text-decoration: underline;
+  outline: none;
+}
+
+.chapter-directory__note {
+  margin-top: 1.75rem;
+  font-size: 0.95rem;
+  color: rgba(35, 48, 67, 0.8);
+  text-align: center;
+}
+
+@media (max-width: 720px) {
+  .chapter-table {
+    min-width: 100%;
+  }
+
+  .chapter-table thead {
+    display: none;
+  }
+
+  .chapter-table tbody {
+    display: grid;
+    gap: 1.25rem;
+    padding: 1.5rem;
+  }
+
+  .chapter-table tr {
+    display: grid;
+    background: rgba(42, 76, 115, 0.04);
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+
+  .chapter-table td {
+    display: grid;
+    gap: 0.25rem;
+    padding: 1rem 1.25rem;
+    border: none;
+  }
+
+  .chapter-table td::before {
+    content: attr(data-label);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    color: rgba(35, 48, 67, 0.7);
+    letter-spacing: 0.05em;
+  }
+}
+
 .affiliates {
   display: grid;
   gap: clamp(2rem, 4vw, 3rem);
