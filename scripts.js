@@ -131,10 +131,44 @@
       const errorMessage = newsletterForm.querySelector('[data-newsletter-error]');
       const submitButton = newsletterForm.querySelector('button[type="submit"]');
       const submitButtonLabel = submitButton ? submitButton.textContent : '';
+      const ADMIN_EMAIL = 'mybiblebelt@gmail.com';
 
       const toggleMessage = (element, shouldShow) => {
         if (!element) return;
         element.hidden = !shouldShow;
+      };
+
+      const addToMailingList = async (emailAddress) => {
+        const endpoint = `https://formsubmit.co/ajax/${encodeURIComponent(ADMIN_EMAIL)}`;
+        const details = [
+          'A new newsletter subscription was received on powerinchristrecovery.org.',
+          '',
+          `Subscriber email: ${emailAddress}`,
+          '',
+          'Please add this address to the weekly encouragement mailing list.'
+        ];
+
+        const payload = {
+          email: emailAddress,
+          message: details.join('\n'),
+          _subject: 'New newsletter subscriber',
+          _template: 'table'
+        };
+
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to add subscriber to mailing list');
+        }
+
+        return response.json();
       };
 
       const sendWelcomeEmail = async (emailAddress) => {
@@ -160,6 +194,7 @@
           email: emailAddress,
           message: welcomeLines.join('\n'),
           _subject: 'Welcome to Power in Christ Recovery',
+          _cc: ADMIN_EMAIL,
           _bcc: 'jonmarlow@gmail.com',
           _template: 'table'
         };
@@ -202,7 +237,7 @@
         }
 
         try {
-          await sendWelcomeEmail(emailAddress);
+          await Promise.all([addToMailingList(emailAddress), sendWelcomeEmail(emailAddress)]);
           newsletterForm.reset();
           toggleMessage(message, true);
         } catch (error) {
