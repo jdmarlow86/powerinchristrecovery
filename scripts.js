@@ -138,6 +138,24 @@
         element.hidden = !shouldShow;
       };
 
+      const welcomeLines = [
+        'Hi there,',
+        '',
+        'Thank you for signing up to receive weekly encouragement from Power in Christ Recovery.',
+        'We are honored to walk alongside you in prayer, Scripture reflection, and Christ-centered support.',
+        '',
+        'Each week you can expect:',
+        '• A short devotional focus rooted in God\'s Word.',
+        '• A prayer prompt to carry with you through the week.',
+        '• Ministry updates and opportunities to stay connected.',
+        '',
+        'We are praying for you. May the peace of Christ guard your heart as you continue this journey toward freedom.',
+        '',
+        'Grace and peace,',
+        'Power in Christ Recovery'
+      ];
+      const welcomeMessage = welcomeLines.join('\n');
+
       const addToMailingList = async (emailAddress) => {
         const endpoint = `https://formsubmit.co/ajax/${encodeURIComponent(ADMIN_EMAIL)}`;
         const details = [
@@ -152,7 +170,8 @@
           email: emailAddress,
           message: details.join('\n'),
           _subject: 'New newsletter subscriber',
-          _template: 'table'
+          _template: 'table',
+          _autoresponse: welcomeMessage
         };
 
         const response = await fetch(endpoint, {
@@ -166,50 +185,6 @@
 
         if (!response.ok) {
           throw new Error('Failed to add subscriber to mailing list');
-        }
-
-        return response.json();
-      };
-
-      const sendWelcomeEmail = async (emailAddress) => {
-        const endpointBase = 'https://formsubmit.co/ajax/';
-        const welcomeLines = [
-          'Hi there,',
-          '',
-          'Thank you for signing up to receive weekly encouragement from Power in Christ Recovery.',
-          'We are honored to walk alongside you in prayer, Scripture reflection, and Christ-centered support.',
-          '',
-          'Each week you can expect:',
-          '• A short devotional focus rooted in God\'s Word.',
-          '• A prayer prompt to carry with you through the week.',
-          '• Ministry updates and opportunities to stay connected.',
-          '',
-          'We are praying for you. May the peace of Christ guard your heart as you continue this journey toward freedom.',
-          '',
-          'Grace and peace,',
-          'Power in Christ Recovery'
-        ];
-
-        const payload = {
-          email: emailAddress,
-          message: welcomeLines.join('\n'),
-          _subject: 'Welcome to Power in Christ Recovery',
-          _cc: ADMIN_EMAIL,
-          _bcc: 'jonmarlow@gmail.com',
-          _template: 'table'
-        };
-
-        const response = await fetch(`${endpointBase}${encodeURIComponent(emailAddress)}`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json'
-          },
-          body: JSON.stringify(payload)
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to send welcome email');
         }
 
         return response.json();
@@ -237,7 +212,7 @@
         }
 
         try {
-          await Promise.all([addToMailingList(emailAddress), sendWelcomeEmail(emailAddress)]);
+          await addToMailingList(emailAddress);
           newsletterForm.reset();
           toggleMessage(message, true);
         } catch (error) {
