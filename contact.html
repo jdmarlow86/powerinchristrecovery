@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | Power in Christ Recovery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav class="site-nav" aria-label="Primary">
+    <div class="site-nav__brand">
+      <a class="site-nav__home" href="index.html">Power in Christ Recovery</a>
+    </div>
+    <div class="site-nav__links">
+      <a class="site-nav__link" href="index.html">Home</a>
+      <a class="site-nav__link" href="testimonies.html">Testimonies</a>
+      <a class="site-nav__link" href="affiliates.html">Affiliates</a>
+      <a class="site-nav__link" href="chapters.html">Chapters</a>
+      <a class="site-nav__link" href="meeting.html">Meetings</a>
+      <a class="site-nav__link site-nav__link--active" href="contact.html">Contact</a>
+      <a class="site-nav__link" href="support.html">Support</a>
+    </div>
+  </nav>
+
+  <header class="hero hero--subpage">
+    <div class="hero__overlay"></div>
+    <div class="hero__content container">
+      <h1>Connect With Our Team</h1>
+      <p class="tagline">We would love to pray with you, answer your questions, and support your journey.</p>
+      <p class="intro">
+        Reach out any time to share a prayer request, ask about starting a chapter, or partner with us in ministry. Our
+        team reads every message and responds as quickly as possible.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <section class="section container contact-page" aria-labelledby="contact-team">
+      <div class="contact-page__intro">
+        <h2 id="contact-team">Contact Power in Christ Recovery</h2>
+        <p>
+          Whether you are exploring how to lead a group, looking for resources, or simply need someone to stand with you
+          in prayer, we are here for you. Please use the form to share a detailed message or email us directly.
+        </p>
+      </div>
+
+      <div class="contact-page__grid">
+        <section class="contact-card" aria-labelledby="contact-details">
+          <h3 id="contact-details">Email the Ministry Team</h3>
+          <p>We monitor both inboxes and aim to respond within two business days.</p>
+          <ul class="contact-card__list">
+            <li>
+              <a href="mailto:mybiblebelt@gmail.com">mybiblebelt@gmail.com</a>
+            </li>
+            <li>
+              <a href="mailto:jonmarlow@gmail.com">jonmarlow@gmail.com</a>
+            </li>
+          </ul>
+          <p class="contact-card__note">Share your story, ask for prayer, or request resources&mdash;we are honored to connect.</p>
+        </section>
+
+        <form class="comment-form contact-form" action="https://formspree.io/f/xknelzjq" method="POST">
+          <div class="comment-form__grid">
+            <div class="comment-form__field">
+              <label class="comment-form__label" for="contact-name">Name</label>
+              <input class="comment-form__input" type="text" id="contact-name" name="name" autocomplete="name" required />
+            </div>
+            <div class="comment-form__field">
+              <label class="comment-form__label" for="contact-email">Email</label>
+              <input
+                class="comment-form__input"
+                type="email"
+                id="contact-email"
+                name="email"
+                autocomplete="email"
+                required
+              />
+            </div>
+            <div class="comment-form__field comment-form__field--full">
+              <label class="comment-form__label" for="contact-topic">Topic</label>
+              <input
+                class="comment-form__input"
+                type="text"
+                id="contact-topic"
+                name="topic"
+                placeholder="Prayer request, chapter launch, resources, etc."
+              />
+            </div>
+            <div class="comment-form__field comment-form__field--full">
+              <label class="comment-form__label" for="contact-message">Message</label>
+              <textarea
+                class="comment-form__textarea"
+                id="contact-message"
+                name="message"
+                rows="6"
+                required
+              ></textarea>
+            </div>
+          </div>
+          <input type="hidden" name="_subject" value="New message from powerinchristrecovery.org" />
+          <div class="comment-form__actions">
+            <button class="comment-form__button" type="submit">Send Message</button>
+          </div>
+          <p class="comment-form__note">Powered by Formspree for secure delivery.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; <span id="year"></span> Power in Christ Recovery. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
